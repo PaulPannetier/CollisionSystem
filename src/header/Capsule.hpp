@@ -32,9 +32,6 @@ namespace ToricCollisionSystem
         Capsule(const Capsule& capsule);
 
         const Vector2& center() const override;
-        bool collide(const Collider2D& c) const override;
-        bool collideLine(const Line2D& line) const override;
-        bool collideStraightLine(const StraightLine2D& line) const override;
         bool contains(const Vector2& point) const override;
         float distance(const Vector2& point) const override;
         float signedDistance(const Vector2& point) const override;

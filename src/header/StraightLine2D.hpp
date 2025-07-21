@@ -9,6 +9,7 @@ namespace ToricCollisionSystem
     public:
         Vector2 A, B;
 
+        StraightLine2D() = default;
         StraightLine2D(const Vector2& A, const Vector2& B);
 
         Vector2 Symetric(const Vector2& M) const;

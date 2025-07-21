@@ -80,24 +80,6 @@ namespace ToricCollisionSystem
         return Useful::isEven(count);
     }
 
-    bool Polygone::collide(const Collider2D& c) const 
-    {
-        //return Collider2D::Collide(c, *this);
-        return false;
-    }
-
-    bool Polygone::collideLine(const Line2D& line) const
-    {
-        //return Collider2D::CollidePolygoneLine(*this, line.A, line.B);
-        return false;
-    }
-
-    bool Polygone::collideStraightLine(const StraightLine2D& line) const
-    {
-        //return Collider2D::CollidePolygoneStaightLine(*this, line.A, line.B);
-        return false;
-    }
-
     bool Polygone::contains(const Vector2& point) const
     {
         if (_vertices.size() < 3)

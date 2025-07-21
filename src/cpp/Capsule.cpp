@@ -89,24 +89,6 @@ namespace ToricCollisionSystem
         return _hitbox->angleHori();
     }
 
-    bool Capsule::collideLine(const Line2D& line) const 
-    {
-        //return CollideCapsuleLine(*this, line.A(), line.B());
-        return false;
-    }
-
-    bool Capsule::collideStraightLine(const StraightLine2D& line) const 
-    {
-        //return CollideCapsuleStraightLine(*this, line.A(), line.B());
-        return false;
-    }
-
-    bool Capsule::collide(const Collider2D& collider) const 
-    {
-        //return Collider2D::Collide(collider, *this);
-        return false;
-    }
-
     Vector2 Capsule::closestPoint(const Vector2& point) const 
     {
         float distance = Vector2::distance(_circle1->center(), _circle2->center());

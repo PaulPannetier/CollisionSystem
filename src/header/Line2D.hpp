@@ -9,6 +9,7 @@ namespace ToricCollisionSystem
     public:
         Vector2 A, B;
 
+        Line2D() = default;
         Line2D(const Vector2& A, const Vector2& B);
         Line2D(const Vector2& start, float angle, float length);
 

@@ -26,9 +26,6 @@ namespace ToricCollisionSystem
 
         const Vector2& center() const override { return _center; }
         const std::vector<Vector2>& vertices() const { return _vertices; }
-        bool collide(const Collider2D& other) const override;
-        bool collideLine(const Line2D& line) const override;
-        bool collideStraightLine(const StraightLine2D& line) const override;
         bool contains(const Vector2& point) const override;
         float distance(const Vector2& point) const override;
         float signedDistance(const Vector2& point) const override;

@@ -20,9 +20,6 @@ namespace ToricCollisionSystem
         const Vector2& center() const override;
         const Circle& inclusiveCircle() const override;
 
-        bool collide(const Collider2D& other) const override;
-        bool collideLine(const Line2D& line) const override;
-        bool collideStraightLine(const StraightLine2D& line) const override;
         bool contains(const Vector2& point) const override;
         float distance(const Vector2& point) const override;
         float signedDistance(const Vector2& point) const override;

@@ -28,22 +28,6 @@ namespace ToricCollisionSystem
         return *this;
     }
 
-    bool Circle::collide(const Collider2D& other) const
-    {
-        //return Collider2D::Collide(collider, this);
-        return false;
-    }
-
-    bool Circle::collideLine(const Line2D& line) const
-    {
-        return Collider2D::CollideCircleLine(*this, line.A, line.B);
-    }
-
-    bool Circle::collideStraightLine(const StraightLine2D& straightLine) const
-    {
-        return Collider2D::CollideCircleStraightLine(*this, straightLine.A, straightLine.B);
-    }
-
     bool Circle::contains(const Vector2& p) const
     {
         return Vector2::sqrDistance(_center, p) <= radius * radius;

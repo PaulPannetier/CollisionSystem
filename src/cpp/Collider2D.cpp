@@ -329,9 +329,9 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollideLineStraightLine(const Vector2& O, const Vector2& P, const Vector2& A, const Vector2& B)
     {
-        Vector2 AB = Vector2(B.x - A.x, B.y - A.y);
-        Vector2 AP = Vector2(P.x - A.x, P.y - A.y);
-        Vector2 AO = Vector2(O.x - A.x, O.y - A.y);
+        Vector2 AB(B.x - A.x, B.y - A.y);
+        Vector2 AP(P.x - A.x, P.y - A.y);
+        Vector2 AO(O.x - A.x, O.y - A.y);
 
         float cross1 = AB.x * AP.y - AB.y * AP.x;
         float cross2 = AB.x * AO.y - AB.y * AO.x;
@@ -426,7 +426,7 @@ namespace ToricCollisionSystem
                 float b = 2.0f * (circle1.center().y * t - N * t - circle1.center().x);
                 float c = circle1.center().x * circle1.center().x + circle1.center().y * circle1.center().y + N * N - circle1.radius * circle1.radius - 2.0f * circle1.center().y * N;
                 float sqrtDelta = sqrt(b * b - 4.0f * a * c);
-                float inv2a = 1.0f / (2.0f * a);
+                float inv2a = 0.5f / a;
                 float x1 = -inv2a * (b + sqrtDelta);
                 float x2 = inv2a * (sqrtDelta - b);
                 outIntersection1 = { x1, N - x1 * t };
@@ -452,8 +452,8 @@ namespace ToricCollisionSystem
             float avg = 0.5f * (A.x + B.x);
             float dx = circle.center().x - avg;
             float sqrtDelta = sqrt(circle.radius * circle.radius - dx * dx);
-            outIntersection1 = Vector2(avg, circle.center().y - sqrtDelta);
-            outIntersection2 = Vector2(avg, circle.center().y + sqrtDelta);
+            outIntersection1 = { avg, circle.center().y - sqrtDelta };
+            outIntersection2 = { avg, circle.center().y + sqrtDelta };
         }
         else
         {
@@ -463,10 +463,10 @@ namespace ToricCollisionSystem
             float b = 2.0f * (m * p - circle.center().x - m * circle.center().y);
             float C = circle.center().x * circle.center().x + p * p - 2.0f * p * circle.center().y + circle.center().y * circle.center().y - circle.radius * circle.radius;
             float sqrtDelta = sqrt(b * b - 4.0f * a * C);
-            float inv2a = 1.0f / (2.0f * a);
+            float inv2a = 0.5f / a;
             m *= inv2a;
-            outIntersection1 = Vector2(-inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p);
-            outIntersection2 = Vector2(inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p);
+            outIntersection1 = { -inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p };
+            outIntersection2 = { inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p };
         }
 
         return true;
@@ -479,7 +479,7 @@ namespace ToricCollisionSystem
             float avg = 0.5f * (A.x + B.x);
             float dx = circle.center().x - avg;
             float sqrtDelta = sqrt(circle.radius * circle.radius - dx * dx);
-            return { Vector2(avg, circle.center().y - sqrtDelta), Vector2(avg, circle.center().y + sqrtDelta) };
+            return { { avg, circle.center().y - sqrtDelta }, { avg, circle.center().y + sqrtDelta} };
         }
         else
         {
@@ -493,8 +493,8 @@ namespace ToricCollisionSystem
             m *= inv2a;
             return 
             {
-                Vector2(-inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p),
-                Vector2(inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p)
+                { -inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p },
+                { inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p }
             };
         }
     }
@@ -510,15 +510,21 @@ namespace ToricCollisionSystem
             float avg = 0.5f * (A.x + B.x);
             float dx = circle.center().x - avg;
             float sqrtDelta = sqrt(circle.radius * circle.radius - dx * dx);
-            i1 = Vector2(avg, circle.center().y - sqrtDelta);
-            i2 = Vector2(avg, circle.center().y + sqrtDelta);
+            i1 = { avg, circle.center().y - sqrtDelta };
+            i2 = { avg, circle.center().y + sqrtDelta };
 
             float minY = min(A.y, B.y) - 1e-4f;
             float maxY = max(A.y, B.y) + 1e-4f;
 
             vector<Vector2> result;
-            if (minY <= i1.y && i1.y <= maxY) result.push_back(i1);
-            if (minY <= i2.y && i2.y <= maxY) result.push_back(i2);
+            if (minY <= i1.y && i1.y <= maxY) 
+            {
+                result.push_back(i1);
+            }
+            if (minY <= i2.y && i2.y <= maxY) 
+            {
+                result.push_back(i2);
+            }
             return result;
         }
         else
@@ -531,8 +537,8 @@ namespace ToricCollisionSystem
             float sqrtDelta = sqrt(b * b - 4.0f * a * C);
             float inv2a = 1.0f / (2.0f * a);
             m *= inv2a;
-            i1 = Vector2(-inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p);
-            i2 = Vector2(inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p);
+            i1 = { -inv2a * (b + sqrtDelta), -m * (b + sqrtDelta) + p };
+            i2 = { inv2a * (sqrtDelta - b), m * (sqrtDelta - b) + p };
 
             float minX = min(A.x, B.x) - 1e-4f;
             float maxX = max(A.x, B.x) + 1e-4f;
@@ -540,8 +546,15 @@ namespace ToricCollisionSystem
             float maxY = max(A.y, B.y) + 1e-4f;
 
             vector<Vector2> result;
-            if (minX <= i1.x && i1.x <= maxX && minY <= i1.y && i1.y <= maxY) result.push_back(i1);
-            if (minX <= i2.x && i2.x <= maxX && minY <= i2.y && i2.y <= maxY) result.push_back(i2);
+            if (minX <= i1.x && i1.x <= maxX && minY <= i1.y && i1.y <= maxY) 
+            {
+                result.push_back(i1);
+            }
+
+            if (minX <= i2.x && i2.x <= maxX && minY <= i2.y && i2.y <= maxY) 
+            {
+                result.push_back(i2);
+            }
             return result;
         }
     }
@@ -1054,7 +1067,7 @@ namespace ToricCollisionSystem
         return (c1.radius >= c2.radius) ? poly1.contains(poly2.center()) : poly2.contains(poly1.center());
     }
 
-    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outoutCollisionPoint)
+    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outCollisionPoint)
     {
         const vector<Vector2>& v1 = poly1.vertices();
         const vector<Vector2>& v2 = poly2.vertices();
@@ -1079,10 +1092,10 @@ namespace ToricCollisionSystem
 
         if (!cache.empty())
         {
-            outoutCollisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             for (const Vector2& pt : cache)
-                outoutCollisionPoint = outoutCollisionPoint + pt;
-            outoutCollisionPoint = outoutCollisionPoint * (1.0f / static_cast<float>(cache.size()));
+                outCollisionPoint = outCollisionPoint + pt;
+            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
             cache.clear();
             return true;
         }
@@ -1091,21 +1104,21 @@ namespace ToricCollisionSystem
 
         if (contains)
         {
-            outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+            outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
             return true;
         }
 
-        outoutCollisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outoutCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
         if (poly1.contains(poly2.center()) && poly2.contains(poly1.center()))
         {
             outNormal1 = Vector2::normalize(poly2.center() - poly1.center());
             outNormal2 = outNormal1 * -1.0f;
-            outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+            outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
             return true;
         }
 
@@ -1144,21 +1157,21 @@ namespace ToricCollisionSystem
             bool contains = (poly1.inclusiveCircle().radius >= poly2.inclusiveCircle().radius) ? poly1.contains(poly2.center()) : poly2.contains(poly1.center());
             if (contains)
             {
-                outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+                outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
                 outNormal1 = Vector2::normalize(poly2.center() - poly1.center());
                 outNormal2 = outNormal1 * -1.0f;
                 return true;
             }
-            outoutCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
+            outCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
             return false;
         }
 
-        outoutCollisionPoint = outNormal1 = Vector2::zero();
+        outCollisionPoint = outNormal1 = Vector2::zero();
         for (const Vector2& pt : cache)
         {
-            outoutCollisionPoint = outoutCollisionPoint + pt;
+            outCollisionPoint = outCollisionPoint + pt;
         }
-        outoutCollisionPoint = outoutCollisionPoint * (1.0f / static_cast<float>(cache.size()));
+        outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
         cache.clear();
 
         for (const Vector2& n : cache1)
@@ -1167,7 +1180,7 @@ namespace ToricCollisionSystem
         }
         outNormal1.normalize();
 
-        if (Vector2::dot(outNormal1, outoutCollisionPoint - poly1.center()) < 0.0f)
+        if (Vector2::dot(outNormal1, outCollisionPoint - poly1.center()) < 0.0f)
         {
             outNormal1 = outNormal1 * -1.0f;
         }
@@ -1181,14 +1194,14 @@ namespace ToricCollisionSystem
         return CollidePolygones(hitbox.toPolygone(), poly);
     }
 
-    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outoutCollisionPoint)
+    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint)
     {
-        return CollidePolygones(poly, hitbox.toPolygone(), outoutCollisionPoint);
+        return CollidePolygones(poly, hitbox.toPolygone(), outCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outoutCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        return CollidePolygones(poly, hitbox.toPolygone(), outoutCollisionPoint, outNormal1, outNormal2);
+        return CollidePolygones(poly, hitbox.toPolygone(), outCollisionPoint, outNormal1, outNormal2);
     }
 
     bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B)
@@ -1207,29 +1220,97 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line)
     {
-        return poly.collideLine(line);
+        return CollidePolygoneLine(poly, line.A, line.B);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outoutCollisionPoint)
+    bool Collider2D::CollidePolygoneLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
+    {
+        uint32_t ip1;
+        Vector2 intersec;
+        vector<Vector2> intersections;
+        for (uint32_t i = 0u; i < polygone.vertices().size(); i++)
+        {
+            ip1 = (i + 1) % polygone.vertices().size();
+            if (CollideLines(polygone.vertices()[i], polygone.vertices()[ip1], A, B, intersec))
+            {
+                intersections.push_back(intersec);
+            }
+        }
+
+        outCollisionPoint = Vector2::zero();
+        StraightLine2D straightLine;
+        float minSqrDist, d;
+
+        if (intersections.empty())
+        {
+            if (polygone.contains(A))
+            {
+                Vector2 cp = Line2D::ClosestPoint(A, B, polygone.center());
+                straightLine = StraightLine2D(cp, cp + (A - B).normalVector());
+                minSqrDist = FLT_MAX;
+
+                for (uint32_t i = 0u; i < polygone.vertices().size(); i++)
+                {
+                    if (CollideLineStraightLine(polygone.vertices()[i], polygone.vertices()[(i + 1) % polygone.vertices().size()], straightLine.A, straightLine.B, intersec))
+                    {
+                        d = Vector2::sqrDistance(intersec, cp);
+                        if (d < minSqrDist)
+                        {
+                            minSqrDist = d;
+                            outCollisionPoint = intersec;
+                        }
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        if (intersections.size() == 1u)
+        {
+            outCollisionPoint = intersections[0];
+            return true;
+        }
+
+        for (uint32_t i = 0u; i < intersections.size(); i++)
+        {
+            outCollisionPoint = outCollisionPoint + intersections[i];
+        }
+
+        Vector2 avgInter = outCollisionPoint / static_cast<float>(intersections.size());
+        straightLine = StraightLine2D(avgInter, avgInter + (B - A).normalVector());
+        minSqrDist = FLT_MAX;
+
+        for (uint32_t i = 0u; i < polygone.vertices().size(); i++)
+        {
+            if (CollideLineStraightLine(polygone.vertices()[i], polygone.vertices()[(i + 1u) % polygone.vertices().size()], straightLine.A, straightLine.B, intersec))
+            {
+                d = Vector2::sqrDistance(intersec, avgInter);
+                if (d < minSqrDist)
+                {
+                    minSqrDist = d;
+                    outCollisionPoint = intersec;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outCollisionPoint)
+    {
+        return CollidePolygoneLine(poly, line.A, line.B, outCollisionPoint);
+    }
+
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
         Line2D line(A, B);
-        return CollidePolygoneLine(poly, line, outoutCollisionPoint);
+        return CollidePolygoneLine(poly, line, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outoutCollisionPoint)
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneLine(poly, line.A, line.B, outoutCollisionPoint);
-    }
-
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outoutCollisionPoint, Vector2& outNormal)
-    {
-        Line2D line(A, B);
-        return CollidePolygoneLine(poly, line, outoutCollisionPoint, outNormal);
-    }
-
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outoutCollisionPoint, Vector2& outNormal)
-    {
-        return CollidePolygoneLine(poly, line.A, line.B, outoutCollisionPoint, outNormal);
+        return CollidePolygoneLine(poly, line.A, line.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B)
@@ -1249,7 +1330,7 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine)
     {
-        return polygone.collideStraightLine(straightLine);
+        return CollidePolygoneStraightLine(polygone, straightLine.A, straightLine.B);
     }
 
     bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)

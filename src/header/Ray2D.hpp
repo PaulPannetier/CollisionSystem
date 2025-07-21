@@ -9,6 +9,7 @@ namespace ToricCollisionSystem
     public:
         Vector2 start, end;
 
+        Ray2D() = default;
         Ray2D(const Vector2& start, const Vector2& end);
     };
 }

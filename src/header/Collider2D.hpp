@@ -222,9 +222,6 @@ namespace ToricCollisionSystem
     public:
         virtual const Vector2& center() const = 0;
 
-        virtual bool collide(const Collider2D& other) const = 0;
-        virtual bool collideLine(const Line2D& line) const = 0;
-        virtual bool collideStraightLine(const StraightLine2D& line) const = 0;
         virtual bool contains(const Vector2& point) const = 0;
         virtual float distance(const Vector2& point) const = 0;
         virtual float signedDistance(const Vector2& point) const = 0;

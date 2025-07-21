@@ -42,24 +42,6 @@ namespace ToricCollisionSystem
         return _rec->inclusiveCircle();
     }
 
-    bool Hitbox::collide(const Collider2D& other) const 
-    {
-        //return Collider2D::Collide(other, *this);
-        return false;
-    }
-
-    bool Hitbox::collideLine(const Line2D& line) const 
-    {
-        //return Collider2D::CollideHitboxLine(*this, line);
-        return false;
-    }
-
-    bool Hitbox::collideStraightLine(const StraightLine2D& line) const
-    {
-        //return Collider2D::CollideHitboxStraightLine(*this, line);
-        return false;
-    }
-
     bool Hitbox::contains(const Vector2& point) const 
     {
         return _rec->contains(point);
