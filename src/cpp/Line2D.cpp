@@ -69,7 +69,7 @@ namespace ToricCollisionSystem
     {
         if (fabs(A.x - B.x) < 1e-2f)
             return { 1.0f, 0.0f };
-        return (B - A).NormalVector();
+        return (B - A).normalVector();
     }
 
     Vector2 Line2D::ClosestPoint(const Vector2& point) const 

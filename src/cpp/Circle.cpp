@@ -28,81 +28,76 @@ namespace ToricCollisionSystem
         return *this;
     }
 
-    bool Circle::Collide(const Collider2D& other) const
+    bool Circle::collide(const Collider2D& other) const
     {
         //return Collider2D::Collide(collider, this);
         return false;
     }
 
-    bool Circle::CollideLine(const Line2D& line) const
+    bool Circle::collideLine(const Line2D& line) const
     {
         return Collider2D::CollideCircleLine(*this, line.A, line.B);
     }
 
-    bool Circle::CollideStraightLine(const StraightLine2D& straightLine) const
+    bool Circle::collideStraightLine(const StraightLine2D& straightLine) const
     {
         return Collider2D::CollideCircleStraightLine(*this, straightLine.A, straightLine.B);
     }
 
-    bool Circle::Contains(const Vector2& p) const
+    bool Circle::contains(const Vector2& p) const
     {
         return Vector2::sqrDistance(_center, p) <= radius * radius;
     }
 
-    float Circle::Distance(const Vector2& point) const
+    float Circle::distance(const Vector2& point) const
     {
         return std::max(0.0f, Vector2::distance(point, _center) - radius);
     }
 
-    float Circle::SignedDistance(const Vector2& point) const
+    float Circle::signedDistance(const Vector2& point) const
     {
         return Vector2::distance(point, _center) - radius;
     }
 
-    float Circle::Area() const
+    float Circle::area() const
     {
         return M_PI * radius * radius;
     }
 
-    Vector2 Circle::ClosestPoint(const Vector2& point) const
+    Vector2 Circle::closestPoint(const Vector2& point) const
     {
         Vector2 direction = point - _center;
-        direction.Normalize();
+        direction.normalize();
         return _center + direction * radius;
     }
 
-    void Circle::MoveAt(const Vector2& position)
+    void Circle::moveAt(const Vector2& position)
     {
         _center = position;
     }
 
-    void Circle::Rotate(float angle)
+    void Circle::rotate(float angle)
     {
         
     }
 
-    void Circle::Scale(const Vector2& scale)
+    void Circle::scale(const Vector2& scale)
     {
         radius *= std::max(scale.x, scale.y);
     }
 
-    Hitbox* Circle::ToHitbox() const
-    {
-        return new Hitbox(_center, { radius, radius });
-    }
-
-    bool Circle::Normal(const Vector2& point, Vector2& normal) const
+    bool Circle::normal(const Vector2& point, Vector2& normal) const
     {
         if (Useful::approximately(Vector2::sqrDistance(_center, point), radius * radius))
         {
             normal = point - _center;
-            normal.Normalize();
+            normal.normalize();
             return true;
         }
-        return Collider2D::Normal(point, normal);
+        return Collider2D::normal(point, normal);
     }
 
-    std::string Circle::ToString() const
+    std::string Circle::toString() const
     {
         std::ostringstream oss;
         oss << "center: (" << _center.x << ", " << _center.y << ") Radius: " << radius;

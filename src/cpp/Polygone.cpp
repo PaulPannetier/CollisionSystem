@@ -65,9 +65,9 @@ namespace ToricCollisionSystem
     {
         Vector2 A = point;
         Vector2 B = point + n * (2.0f * _inclusiveCircle->radius);
-        size_t count = 0;
+        uint32_t count = 0;
 
-        for (size_t i = 0; i < _vertices.size(); i++) 
+        for (uint32_t i = 0; i < _vertices.size(); i++) 
         {
             if (i == indexSide) 
                 continue;
@@ -80,36 +80,36 @@ namespace ToricCollisionSystem
         return Useful::isEven(count);
     }
 
-    bool Polygone::Collide(const Collider2D& c) const 
+    bool Polygone::collide(const Collider2D& c) const 
     {
         //return Collider2D::Collide(c, *this);
         return false;
     }
 
-    bool Polygone::CollideLine(const Line2D& line) const
+    bool Polygone::collideLine(const Line2D& line) const
     {
         //return Collider2D::CollidePolygoneLine(*this, line.A, line.B);
         return false;
     }
 
-    bool Polygone::CollideStraightLine(const StraightLine2D& line) const
+    bool Polygone::collideStraightLine(const StraightLine2D& line) const
     {
         //return Collider2D::CollidePolygoneStaightLine(*this, line.A, line.B);
         return false;
     }
 
-    bool Polygone::Contains(const Vector2& point) const
+    bool Polygone::contains(const Vector2& point) const
     {
         if (_vertices.size() < 3)
             return false;
 
-        if (!_inclusiveCircle->Contains(point))
+        if (!_inclusiveCircle->contains(point))
             return false;
 
         Vector2 I = _center + Random::Vector2(_inclusiveCircle->radius * 2.0f);
         int intersections = 0;
 
-        for (size_t i = 0; i < _vertices.size(); i++)
+        for (uint32_t i = 0; i < _vertices.size(); i++)
         {
             const Vector2& A = _vertices[i];
             const Vector2& B = _vertices[(i + 1) % _vertices.size()];
@@ -119,7 +119,7 @@ namespace ToricCollisionSystem
             float denom = D.x * E.y - D.y * E.x;
 
             if (Useful::approximately(denom, 0.0f))
-                return Contains(point);
+                return contains(point);
 
             float t = -(A.x * E.y - I.x * E.y - E.x * A.y + E.x * I.y) / denom;
             if (t < 0.0f || t >= 1.0f)
@@ -135,22 +135,22 @@ namespace ToricCollisionSystem
         return Useful::isOdd(intersections);
     }
 
-    float Polygone::Distance(const Vector2& point) const
+    float Polygone::distance(const Vector2& point) const
     {
-        return Contains(point) ? 0.0f : Vector2::distance(ClosestPoint(point), point);
+        return contains(point) ? 0.0f : Vector2::distance(closestPoint(point), point);
     }
 
-    float Polygone::SignedDistance(const Vector2& point) const
+    float Polygone::signedDistance(const Vector2& point) const
     {
-        Vector2 closest = ClosestPoint(point);
+        Vector2 closest = closestPoint(point);
         float dist = Vector2::distance(closest, point);
-        return Contains(point) ? -dist : dist;
+        return contains(point) ? -dist : dist;
     }
 
-    float Polygone::Area() const
+    float Polygone::area() const
     {
         float sum = 0.0f;
-        for (size_t i = 0; i < _vertices.size(); i++)
+        for (uint32_t i = 0; i < _vertices.size(); i++)
         {
             const Vector2& p1 = _vertices[i];
             const Vector2& p2 = _vertices[(i + 1) % _vertices.size()];
@@ -159,7 +159,7 @@ namespace ToricCollisionSystem
         return 0.5f * abs(sum);
     }
 
-    Vector2 Polygone::ClosestPoint(const Vector2& point) const
+    Vector2 Polygone::closestPoint(const Vector2& point) const
     {
         vector<Vector2> closest(_vertices.size());
         for (uint32_t i = 0u; i < _vertices.size(); i++)
@@ -182,7 +182,7 @@ namespace ToricCollisionSystem
         return closest[index];
     }
 
-    void Polygone::MoveAt(const Vector2& position) 
+    void Polygone::moveAt(const Vector2& position) 
     {
         Vector2 oldCenter = _center;
         _center = position;
@@ -190,10 +190,10 @@ namespace ToricCollisionSystem
         {
             v = _center + (v - oldCenter);
         }
-        _inclusiveCircle->MoveAt(position);
+        _inclusiveCircle->moveAt(position);
     }
 
-    void Polygone::Rotate(float angle)
+    void Polygone::rotate(float angle)
     {
         for (Vector2& v : _vertices)
         {
@@ -203,7 +203,7 @@ namespace ToricCollisionSystem
         }
     }
 
-    void Polygone::Scale(const Vector2& scale) 
+    void Polygone::scale(const Vector2& scale) 
     {
         for (Vector2& v : _vertices) 
         {
@@ -212,7 +212,7 @@ namespace ToricCollisionSystem
         ComputeInclusiveCircle();
     }
 
-    bool Polygone::Normal(const Vector2& point, Vector2& outNormal) const 
+    bool Polygone::normal(const Vector2& point, Vector2& outNormal) const 
     {
         uint32_t minIndex = 0;
         float minSqr = Line2D::SqrDistance(_vertices[0], _vertices[1], point);
@@ -242,12 +242,7 @@ namespace ToricCollisionSystem
         return true;
     }
 
-    Hitbox* Polygone::ToHitbox() const 
-    {
-        return new Hitbox(_center, { _inclusiveCircle->radius, _inclusiveCircle->radius });
-    }
-
-    string Polygone::ToString() const 
+    string Polygone::toString() const 
     {
         ostringstream ss;
         ss << "Vertices number : " << _vertices.size() << "\nVertices :\n";

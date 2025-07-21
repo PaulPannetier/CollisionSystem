@@ -16,6 +16,11 @@ namespace ToricCollisionSystem
 
     class Collider2D
     {
+        friend class Circle;
+        friend class Polygone;
+        friend class Hitbox;
+        friend class Capsule;
+
         #pragma region static methods
 
     private:
@@ -24,7 +29,6 @@ namespace ToricCollisionSystem
         static std::pair<Vector2, Vector2> ComputeCircleStraightLineIntersectionsUnchecked(const Circle& circle, const Vector2& A, const Vector2& B);
         static std::vector<Vector2> ComputeCircleLineIntersections(const Circle& circle, const Vector2& A, const Vector2& B);
 
-    public:
         static bool CollideStraightLines(const StraightLine2D& l1, const StraightLine2D& l2);
         static bool CollideStraightLines(const Vector2& A, const Vector2& B, const Vector2& O, const Vector2& P);
         static bool CollideStraightLines(const StraightLine2D& l1, const StraightLine2D& l2, Vector2& outCollisionPoint);
@@ -48,10 +52,10 @@ namespace ToricCollisionSystem
 
         static bool CollideCircles(const Circle& circle1, const Circle& circle2);
         static bool CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint);
-        static bool CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollideCirclePolygone(const Circle& circle, const Polygone& polygone);
-        static bool CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& collisionPoint);
-        static bool CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint);
+        static bool CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox);
         static bool CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint);
         static bool CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
@@ -82,7 +86,7 @@ namespace ToricCollisionSystem
         static bool CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox);
         static bool CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint);
-        static bool CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B);
         static bool CollidePolygoneLine(const Polygone& poly, const Line2D& line);
         static bool CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint);
@@ -106,51 +110,109 @@ namespace ToricCollisionSystem
         static bool CollidePolygoneCapsule(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
 
         static bool CollideHitboxes(const Hitbox& h1, const Hitbox& h2);
-        static bool CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& collisionPoint);
-        static bool CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& outCollisionPoint);
+        static bool CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B);
         static bool CollideHitboxLine(const Hitbox& hitbox, const Line2D& line);
-        static bool CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint);
-        static bool CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& collisionPoint);
-        static bool CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint);
+        static bool CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& outCollisionPoint);
+        static bool CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal);
         static bool CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line);
         static bool CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B);
-        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint);
-        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& collisionPoint);
-        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint);
+        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& outCollisionPoint);
+        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& outCollisionPoint, Vector2& outNormal);
         static bool CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray);
         static bool CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end);
-        static bool CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& collisionPoint);
-        static bool CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& collisionPoint);
-        static bool CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& outCollisionPoint);
+        static bool CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint);
+        static bool CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal);
         static bool CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule);
-        static bool CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& collisionPoint);
-        static bool CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint);
+        static bool CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
 
         static bool CollideCapsules(const Capsule& capsule1, const Capsule& capsule2);
-        static bool CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& collisionPoint);
-        static bool CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2);
+        static bool CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint);
+        static bool CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
         static bool CollideCapsuleLine(const Capsule& capsule, const Line2D& line);
         static bool CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B);
-        static bool CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& collisionPoint);
-        static bool CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint);
-        static bool CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& outCollisionPoint);
+        static bool CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint);
+        static bool CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal);
         static bool CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& line);
         static bool CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B);
-        static bool CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint);
-        static bool CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& collisionPoint);
-        static bool CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint);
+        static bool CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& outCollisionPoint);
+        static bool CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal);
         static bool CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray);
         static bool CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end);
-        static bool CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& collisionPoint);
-        static bool CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& collisionPoint);
-        static bool CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal);
-        static bool CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal);
+        static bool CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& outCollisionPoint);
+        static bool CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint);
+        static bool CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal);
+        static bool CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal);
+
+    public:
+
+        #pragma region general collision
+
+        static bool Collide(const Circle& circle1, const Circle& circle2);
+        static bool Collide(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint);
+        static bool Collide(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Circle& circle, const Polygone& polygone);
+        static bool Collide(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint);
+        static bool Collide(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Polygone& polygone, const Circle& circle);
+        static bool Collide(const Polygone& polygone, const Circle& circle, Vector2& outCollisionPoint);
+        static bool Collide(const Polygone& polygone, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Circle& circle, const Hitbox& hitbox);
+        static bool Collide(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint);
+        static bool Collide(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Hitbox& hitbox, const Circle& circle);
+        static bool Collide(const Hitbox& hitbox, const Circle& circle, Vector2& outCollisionPoint);
+        static bool Collide(const Hitbox& hitbox, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Circle& circle, const Capsule& capsule);
+        static bool Collide(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint);
+        static bool Collide(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Capsule& capsule, const Circle& circle);
+        static bool Collide(const Capsule& capsule, const Circle& circle, Vector2& outCollisionPoint);
+        static bool Collide(const Capsule& capsule, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+
+        static bool Collide(const Polygone& polygone1, const Polygone& polygone2);
+        static bool Collide(const Polygone& polygone1, const Polygone& polygone2, Vector2& outCollisionPoint);
+        static bool Collide(const Polygone& polygone1, const Polygone& polygone2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Polygone& polygone, const Hitbox& hitbox);
+        static bool Collide(const Polygone& polygone, const Hitbox& hitbox, Vector2& outCollisionPoint);
+        static bool Collide(const Polygone& polygone, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Hitbox& hitbox, const Polygone& polygone);
+        static bool Collide(const Hitbox& hitbox, const Polygone& polygone, Vector2& outCollisionPoint);
+        static bool Collide(const Hitbox& hitbox, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Polygone& polygone, const Capsule& capsule);
+        static bool Collide(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint);
+        static bool Collide(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Capsule& capsule, const Polygone& polygone);
+        static bool Collide(const Capsule& capsule, const Polygone& polygone, Vector2& outCollisionPoint);
+        static bool Collide(const Capsule& capsule, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+
+        static bool Collide(const Hitbox& hitbox1, const Hitbox& hitbox2);
+        static bool Collide(const Hitbox& hitbox1, const Hitbox& hitbox2, Vector2& outCollisionPoint);
+        static bool Collide(const Hitbox& hitbox1, const Hitbox& hitbox2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Hitbox& hitbox, const Capsule& capsule);
+        static bool Collide(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint);
+        static bool Collide(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+        static bool Collide(const Capsule& capsule, const Hitbox& hitbox);
+        static bool Collide(const Capsule& capsule, const Hitbox& hitbox, Vector2& outCollisionPoint);
+        static bool Collide(const Capsule& capsule, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+
+        static bool Collide(const Capsule& capsule1, const Capsule& capsule2);
+        static bool Collide(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint);
+        static bool Collide(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2);
+
+        #pragma endregion
 
         #pragma endregion
 
@@ -160,25 +222,23 @@ namespace ToricCollisionSystem
     public:
         virtual const Vector2& center() const = 0;
 
-        virtual bool Collide(const Collider2D& other) const = 0;
-        virtual bool CollideLine(const Line2D& line) const = 0;
-        virtual bool CollideStraightLine(const StraightLine2D& line) const = 0;
-        virtual bool Contains(const Vector2& point) const = 0;
-        virtual float Distance(const Vector2& point) const = 0;
-        virtual float SignedDistance(const Vector2& point) const = 0;
-        virtual float Area() const = 0;
-        virtual Vector2 ClosestPoint(const Vector2& point) const = 0;
-        virtual void MoveAt(const Vector2& position) = 0;
-        virtual void Rotate(float angle) = 0;
-        virtual void Scale(const Vector2& scale) = 0;
-        virtual Hitbox* ToHitbox() const = 0;
-
-        virtual bool Normal(const Vector2& point, Vector2& outNormal) const
+        virtual bool collide(const Collider2D& other) const = 0;
+        virtual bool collideLine(const Line2D& line) const = 0;
+        virtual bool collideStraightLine(const StraightLine2D& line) const = 0;
+        virtual bool contains(const Vector2& point) const = 0;
+        virtual float distance(const Vector2& point) const = 0;
+        virtual float signedDistance(const Vector2& point) const = 0;
+        virtual float area() const = 0;
+        virtual Vector2 closestPoint(const Vector2& point) const = 0;
+        virtual void moveAt(const Vector2& position) = 0;
+        virtual void rotate(float angle) = 0;
+        virtual void scale(const Vector2& scale) = 0;
+        virtual bool normal(const Vector2& point, Vector2& outNormal) const
         {
             outNormal = Vector2::zero();
             return false;
         }
-        virtual std::string ToString() const = 0;
+        virtual std::string toString() const = 0;
         virtual ~Collider2D() = default;
     };
 }

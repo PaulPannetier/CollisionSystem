@@ -29,11 +29,11 @@ namespace ToricCollisionSystem
 
         }
 
-        Vector2 NormalVector();
+        Vector2 normalVector();
         static Vector2 normalize(const Vector2& vector);
         float length();
         float sqr_length();
-        void Normalize();
+        void normalize();
         std::string to_string() const;
     };
 

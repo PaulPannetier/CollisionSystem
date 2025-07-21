@@ -90,7 +90,7 @@ namespace ToricCollisionSystem
         if (abs(A.x - B.x) < 1e-2f)
             return { 1.0f, 0.0f };
         Vector2 res((B.y - A.y) / (B.x - A.x), -1.0f);
-        res.Normalize();
+        res.normalize();
         return res;
     }
 

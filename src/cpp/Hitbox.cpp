@@ -42,98 +42,88 @@ namespace ToricCollisionSystem
         return _rec->inclusiveCircle();
     }
 
-    Polygone* Hitbox::toPolygone() const
-    {
-        return new Polygone(*_rec);
-    }
-
-    bool Hitbox::Collide(const Collider2D& other) const 
+    bool Hitbox::collide(const Collider2D& other) const 
     {
         //return Collider2D::Collide(other, *this);
         return false;
     }
 
-    bool Hitbox::CollideLine(const Line2D& line) const 
+    bool Hitbox::collideLine(const Line2D& line) const 
     {
         //return Collider2D::CollideHitboxLine(*this, line);
         return false;
     }
 
-    bool Hitbox::CollideStraightLine(const StraightLine2D& line) const
+    bool Hitbox::collideStraightLine(const StraightLine2D& line) const
     {
         //return Collider2D::CollideHitboxStraightLine(*this, line);
         return false;
     }
 
-    bool Hitbox::Contains(const Vector2& point) const 
+    bool Hitbox::contains(const Vector2& point) const 
     {
-        return _rec->Contains(point);
+        return _rec->contains(point);
     }
 
-    float Hitbox::Distance(const Vector2& point) const 
+    float Hitbox::distance(const Vector2& point) const 
     {
-        return _rec->Distance(point);
+        return _rec->distance(point);
     }
 
-    float Hitbox::SignedDistance(const Vector2& point) const 
+    float Hitbox::signedDistance(const Vector2& point) const 
     {
-        return _rec->SignedDistance(point);
+        return _rec->signedDistance(point);
     }
 
-    float Hitbox::Area() const 
+    float Hitbox::area() const 
     {
         return _size.x * _size.y;
     }
 
-    Vector2 Hitbox::ClosestPoint(const Vector2& point) const 
+    Vector2 Hitbox::closestPoint(const Vector2& point) const 
     {
-        return _rec->ClosestPoint(point);
+        return _rec->closestPoint(point);
     }
 
-    void Hitbox::MoveAt(const Vector2& position) 
+    void Hitbox::moveAt(const Vector2& position) 
     {
-        _rec->MoveAt(position);
+        _rec->moveAt(position);
     }
 
-    void Hitbox::Scale(const Vector2& scale) 
+    void Hitbox::scale(const Vector2& scale) 
     {
-        _rec->Scale(scale);
+        _rec->scale(scale);
         _size = { _size.x * scale.x, _size.y * scale.y };
     }
 
-    void Hitbox::Rotate(float angle) 
+    void Hitbox::rotate(float angle) 
     {
         if (abs(angle) > FLT_EPSILON)
         {
-            _rec->Rotate(angle);
+            _rec->rotate(angle);
         }
     }
 
-    float Hitbox::AngleHori() const 
+    float Hitbox::angleHori() const 
     {
         const vector<Vector2>& verts = _rec->vertices();
         return Useful::angleHori(_rec->center(), (verts[2] + verts[1]) * 0.5f);
     }
 
-    Hitbox* Hitbox::ToHitbox() const
-    {
-        return new Hitbox(*this);
-    }
-
-    const Polygone& Hitbox::ToPolygone() const
+    const Polygone& Hitbox::toPolygone() const
     {
         return *_rec;
     }
 
-    bool Hitbox::Normal(const Vector2& point, Vector2& outNormal) const 
+    bool Hitbox::normal(const Vector2& point, Vector2& outNormal) const 
     {
-        return _rec->Normal(point, outNormal);
+        return _rec->normal(point, outNormal);
     }
 
-    string Hitbox::ToString() const 
+    string Hitbox::toString() const 
     {
         ostringstream oss;
-        oss << "Center:" << center().x << "," << center().y << " Size:" << _size.x << "," << _size.y << " rotation:" << AngleHori();
+        oss << "Center:" << center().x << "," << center().y << " Size:" << _size.x << "," << _size.y << " rotation:" << angleHori();
         return oss.str();
     }
 

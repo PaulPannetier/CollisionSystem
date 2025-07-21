@@ -41,7 +41,7 @@ namespace ToricCollisionSystem
         return sqrt(x * x + (y * y));
     }
 
-    Vector2 Vector2::NormalVector()
+    Vector2 Vector2::normalVector()
     {
         if (!Useful::approximately(x, 0.0f))
         {
@@ -59,7 +59,7 @@ namespace ToricCollisionSystem
         }
     }
 
-    void Vector2::Normalize()
+    void Vector2::normalize()
     {
         float length = sqrt(x * x + (y * y));
         this->x /= length;

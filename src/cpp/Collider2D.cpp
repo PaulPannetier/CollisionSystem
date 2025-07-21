@@ -8,6 +8,250 @@ using namespace std;
 
 namespace ToricCollisionSystem
 {
+    #pragma region General collision
+
+    bool Collider2D::Collide(const Circle& circle1, const Circle& circle2)
+    {
+        return CollideCircles(circle1, circle2);
+    }
+
+    bool Collider2D::Collide(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint)
+    {
+        return CollideCircles(circle1, circle2, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCircles(circle1, circle2, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Polygone& polygone)
+    {
+        return CollideCirclePolygone(circle, polygone);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint)
+    {
+        return CollideCirclePolygone(circle, polygone, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCirclePolygone(circle, polygone, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Circle& circle)
+    {
+        return CollideCirclePolygone(circle, polygone);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Circle& circle, Vector2& outCollisionPoint)
+    {
+        return CollideCirclePolygone(circle, polygone, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCirclePolygone(circle, polygone, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Hitbox& hitbox)
+    {
+        return CollideCircleHitbox(circle, hitbox);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint)
+    {
+        return CollideCircleHitbox(circle, hitbox, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCircleHitbox(circle, hitbox, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Circle& circle)
+    {
+        return CollideCircleHitbox(circle, hitbox);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Circle& circle, Vector2& outCollisionPoint)
+    {
+        return CollideCircleHitbox(circle, hitbox, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCircleHitbox(circle, hitbox, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Capsule& capsule)
+    {
+        return CollideCircleCapsule(circle, capsule);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint)
+    {
+        return CollideCircleCapsule(circle, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCircleCapsule(circle, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Circle& circle)
+    {
+        return CollideCircleCapsule(circle, capsule);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Circle& circle, Vector2& outCollisionPoint)
+    {
+        return CollideCircleCapsule(circle, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Circle& circle, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCircleCapsule(circle, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone1, const Polygone& polygone2)
+    {
+        return CollidePolygones(polygone1, polygone2);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone1, const Polygone& polygone2, Vector2& outCollisionPoint)
+    {
+        return CollidePolygones(polygone1, polygone2, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone1, const Polygone& polygone2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollidePolygones(polygone1, polygone2, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Hitbox& hitbox)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Hitbox& hitbox, Vector2& outCollisionPoint)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Polygone& polygone)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Polygone& polygone, Vector2& outCollisionPoint)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollidePolygoneHitbox(polygone, hitbox, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Capsule& capsule)
+    {
+        return CollidePolygoneCapsule(polygone, capsule);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint)
+    {
+        return CollidePolygoneCapsule(polygone, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollidePolygoneCapsule(polygone, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Polygone& polygone)
+    {
+        return CollidePolygoneCapsule(polygone, capsule);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Polygone& polygone, Vector2& outCollisionPoint)
+    {
+        return CollidePolygoneCapsule(polygone, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollidePolygoneCapsule(polygone, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox1, const Hitbox& hitbox2)
+    {
+        return CollideHitboxes(hitbox1, hitbox2);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox1, const Hitbox& hitbox2, Vector2& outCollisionPoint)
+    {
+        return CollideHitboxes(hitbox1, hitbox2, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox1, const Hitbox& hitbox2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideHitboxes(hitbox1, hitbox2, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Capsule& capsule)
+    {
+        return CollideHitboxCapsule(hitbox, capsule);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint)
+    {
+        return CollideHitboxCapsule(hitbox, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideHitboxCapsule(hitbox, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Hitbox& hitbox)
+    {
+        return CollideHitboxCapsule(hitbox, capsule);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Hitbox& hitbox, Vector2& outCollisionPoint)
+    {
+        return CollideHitboxCapsule(hitbox, capsule, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideHitboxCapsule(hitbox, capsule, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule1, const Capsule& capsule2)
+    {
+        return CollideCapsules(capsule1, capsule2);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint)
+    {
+        return CollideCapsules(capsule1, capsule2, outCollisionPoint);
+    }
+
+    bool Collider2D::Collide(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    {
+        return CollideCapsules(capsule1, capsule2, outCollisionPoint, outNormal1, outNormal2);
+    }
+
+    #pragma endregion
+
     #pragma region Lines / Straightline / Ray
 
     bool Collider2D::CollideStraightLines(const StraightLine2D& l1, const StraightLine2D& l2)
@@ -25,12 +269,12 @@ namespace ToricCollisionSystem
         return abs(det) > 1e-3f;
     }
 
-    bool Collider2D::CollideStraightLines(const StraightLine2D& l1, const StraightLine2D& l2, Vector2& collisionPoint)
+    bool Collider2D::CollideStraightLines(const StraightLine2D& l1, const StraightLine2D& l2, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideStraightLines(l1.A, l1.B, l2.A, l2.B, collisionPoint);
+        return Collider2D::CollideStraightLines(l1.A, l1.B, l2.A, l2.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideStraightLines(const Vector2& A, const Vector2& B, const Vector2& O, const Vector2& P, Vector2& collisionPoint)
+    bool Collider2D::CollideStraightLines(const Vector2& A, const Vector2& B, const Vector2& O, const Vector2& P, Vector2& outCollisionPoint)
     {
         float dx1 = B.x - A.x;
         float dy1 = B.y - A.y;
@@ -40,7 +284,7 @@ namespace ToricCollisionSystem
 
         if (abs(det) <= 1e-3f)
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
@@ -48,8 +292,8 @@ namespace ToricCollisionSystem
         float dy3 = O.y - A.y;
         float t = (dx3 * dy2 - dy3 * dx2) / det;
 
-        collisionPoint.x = A.x + t * dx1;
-        collisionPoint.y = A.y + t * dy1;
+        outCollisionPoint.x = A.x + t * dx1;
+        outCollisionPoint.y = A.y + t * dy1;
         return true;
     }
 
@@ -63,19 +307,19 @@ namespace ToricCollisionSystem
         return Collider2D::CollideLineStraightLine(A, B, O, P) && Collider2D::CollideLineStraightLine(O, P, A, B);
     }
 
-    bool Collider2D::CollideLines(const Line2D& l1, const Line2D& l2, Vector2& collisionPoint)
+    bool Collider2D::CollideLines(const Line2D& l1, const Line2D& l2, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLines(l1.A, l1.B, l2.A, l2.B, collisionPoint);
+        return Collider2D::CollideLines(l1.A, l1.B, l2.A, l2.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideLines(const Vector2& A, const Vector2& B, const Vector2& O, const Vector2& P, Vector2& collisionPoint)
+    bool Collider2D::CollideLines(const Vector2& A, const Vector2& B, const Vector2& O, const Vector2& P, Vector2& outCollisionPoint)
     {
         if (!CollideLineStraightLine(A, B, O, P) || !CollideLineStraightLine(O, P, A, B))
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
-        return Collider2D::CollideStraightLines(A, B, O, P, collisionPoint);
+        return Collider2D::CollideStraightLines(A, B, O, P, outCollisionPoint);
     }
 
     bool Collider2D::CollideLineStraightLine(const Line2D& line, const StraightLine2D& straightLine)
@@ -94,19 +338,19 @@ namespace ToricCollisionSystem
         return cross1 * cross2 < 0.0f;
     }
 
-    bool Collider2D::CollideLineStraightLine(const Line2D& line, const StraightLine2D& straightLine, Vector2& collisionPoint)
+    bool Collider2D::CollideLineStraightLine(const Line2D& line, const StraightLine2D& straightLine, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLineStraightLine(line.A, line.B, straightLine.A, straightLine.B, collisionPoint);
+        return Collider2D::CollideLineStraightLine(line.A, line.B, straightLine.A, straightLine.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideLineStraightLine(const Vector2& O, const Vector2& P, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideLineStraightLine(const Vector2& O, const Vector2& P, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
         if (Collider2D::CollideLineStraightLine(O, P, A, B))
         {
-            return Collider2D::CollideStraightLines(O, P, A, B, collisionPoint);
+            return Collider2D::CollideStraightLines(O, P, A, B, outCollisionPoint);
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
@@ -115,9 +359,9 @@ namespace ToricCollisionSystem
         return Collider2D::CollideLines(line.A, line.B, ray.start, ray.end);
     }
 
-    bool Collider2D::CollideLineRay(const Line2D& line, const Ray2D& ray, Vector2& collisionPoint)
+    bool Collider2D::CollideLineRay(const Line2D& line, const Ray2D& ray, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLines(line.A, line.B, ray.start, ray.end, collisionPoint);
+        return Collider2D::CollideLines(line.A, line.B, ray.start, ray.end, outCollisionPoint);
     }
 
     bool Collider2D::CollideStraightLineRay(const StraightLine2D& line, const Ray2D& ray)
@@ -125,9 +369,9 @@ namespace ToricCollisionSystem
         return Collider2D::CollideLineStraightLine(ray.start, ray.end, line.A, line.B);
     }
 
-    bool Collider2D::CollideStraightLineRay(const StraightLine2D& line, const Ray2D& ray, Vector2& collisionPoint)
+    bool Collider2D::CollideStraightLineRay(const StraightLine2D& line, const Ray2D& ray, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLineStraightLine(ray.start, ray.end, line.A, line.B, collisionPoint);
+        return Collider2D::CollideLineStraightLine(ray.start, ray.end, line.A, line.B, outCollisionPoint);
     }
 
     bool Collider2D::CollideRays(const Ray2D& ray1, const Ray2D& ray2)
@@ -140,14 +384,14 @@ namespace ToricCollisionSystem
         return Collider2D::CollideLines(start1, end1, start2, end2);
     }
 
-    bool Collider2D::CollideRays(const Ray2D& ray1, const Ray2D& ray2, Vector2& collisionPoint)
+    bool Collider2D::CollideRays(const Ray2D& ray1, const Ray2D& ray2, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLines(ray1.start, ray1.end, ray2.start, ray2.end, collisionPoint);
+        return Collider2D::CollideLines(ray1.start, ray1.end, ray2.start, ray2.end, outCollisionPoint);
     }
 
-    bool Collider2D::CollideRays(const Vector2& start1, const Vector2& end1, const Vector2& start2, const Vector2& end2, Vector2& collisionPoint)
+    bool Collider2D::CollideRays(const Vector2& start1, const Vector2& end1, const Vector2& start2, const Vector2& end2, Vector2& outCollisionPoint)
     {
-        return Collider2D::CollideLines(start1, end1, start2, end2, collisionPoint);
+        return Collider2D::CollideLines(start1, end1, start2, end2, outCollisionPoint);
     }
 
     #pragma endregion
@@ -308,7 +552,7 @@ namespace ToricCollisionSystem
         return Vector2::sqrDistance(circle1.center(), circle2.center()) <= rr * rr;
     }
 
-    bool Collider2D::CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& collisionPoint)
+    bool Collider2D::CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint)
     {
         float sqrDist = Vector2::sqrDistance(circle1.center(), circle2.center());
         float rr = circle1.radius + circle2.radius;
@@ -316,14 +560,14 @@ namespace ToricCollisionSystem
         {
             float dist = sqrt(sqrDist);
             float d = 0.5f * (rr - dist);
-            collisionPoint = circle1.center() + ((circle2.center() - circle1.center()) * ((circle1.radius - d) / dist));
+            outCollisionPoint = circle1.center() + ((circle2.center() - circle1.center()) * ((circle1.radius - d) / dist));
             return true;
         }
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideCircles(const Circle& circle1, const Circle& circle2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
         float sqrDist = Vector2::sqrDistance(circle1.center(), circle2.center());
         float rr = (circle1.radius + circle2.radius);
@@ -331,12 +575,12 @@ namespace ToricCollisionSystem
         {
             float dist = sqrt(sqrDist);
             float d = 0.5f * (rr - dist);
-            collisionPoint = circle1.center() + ((circle2.center() - circle1.center()) * ((circle1.radius - d) / dist));
-            normal1 = (collisionPoint - circle1.center()) * (1.0f / (circle1.radius - d));
-            normal2 = (collisionPoint - circle2.center()) * (1.0f / (circle2.radius - d));
+            outCollisionPoint = circle1.center() + ((circle2.center() - circle1.center()) * ((circle1.radius - d) / dist));
+            outNormal1 = (outCollisionPoint - circle1.center()) * (1.0f / (circle1.radius - d));
+            outNormal2 = (outCollisionPoint - circle2.center()) * (1.0f / (circle2.radius - d));
             return true;
         }
-        collisionPoint = normal1 = normal2 = Vector2::zero();
+        outCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
         return false;
     }
 
@@ -351,12 +595,12 @@ namespace ToricCollisionSystem
                 return true;
         }
 
-        return circle.Contains(polygone.center()) || (polygone.inclusiveCircle().radius > circle.radius && polygone.Contains(circle.center()));
+        return circle.contains(polygone.center()) || (polygone.inclusiveCircle().radius > circle.radius && polygone.contains(circle.center()));
     }
 
-    bool Collider2D::CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& collisionPoint)
+    bool Collider2D::CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint)
     {
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         Vector2 i1, i2;
         Vector2 A, B;
 
@@ -379,7 +623,7 @@ namespace ToricCollisionSystem
                         Vector2 tmp = (i1 + i2) * 0.5f;
                         float dist = circle.radius - ((circle.radius - Vector2::distance(circle.center(), tmp)) * 0.5f);
                         Vector2 dir = tmp - circle.center();
-                        dir.Normalize();
+                        dir.normalize();
                         cache.push_back(circle.center() + dir * dist);
                     }
                     else if (containI1)
@@ -398,48 +642,48 @@ namespace ToricCollisionSystem
         {
             for (const Vector2& pos : cache)
             {
-                collisionPoint = collisionPoint + pos;
+                outCollisionPoint = outCollisionPoint + pos;
             }
-            collisionPoint = collisionPoint * (1.0f / static_cast<float>(cache.size()));
+            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
             cache.clear();
             return true;
         }
 
-        if (polygone.Contains(circle.center()))
+        if (polygone.contains(circle.center()))
         {
-            collisionPoint = (circle.center() + polygone.center()) * 0.5f;
+            outCollisionPoint = (circle.center() + polygone.center()) * 0.5f;
             return true;
         }
     }
 
-    bool Collider2D::CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideCirclePolygone(const Circle& circle, const Polygone& polygone, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        if (CollideCirclePolygone(circle, polygone, collisionPoint))
+        if (CollideCirclePolygone(circle, polygone, outCollisionPoint))
         {
-            normal1 = collisionPoint - circle.center();
-            normal1.Normalize();
-            normal2 = normal1 * -1.0f;
+            outNormal1 = outCollisionPoint - circle.center();
+            outNormal1.normalize();
+            outNormal2 = outNormal1 * -1.0f;
             return true;
         }
 
-        normal1 = Vector2::zero();
-        normal2 = Vector2::zero();
+        outNormal1 = Vector2::zero();
+        outNormal2 = Vector2::zero();
         return false;
     }
 
     bool Collider2D::CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox)
     {
-        return CollideCirclePolygone(circle, hitbox.ToPolygone());
+        return CollideCirclePolygone(circle, hitbox.toPolygone());
     }
 
-    bool Collider2D::CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& collisionPoint)
+    bool Collider2D::CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint)
     {
-        return CollideCirclePolygone(circle, hitbox.ToPolygone(), collisionPoint);
+        return CollideCirclePolygone(circle, hitbox.toPolygone(), outCollisionPoint);
     }
 
-    bool Collider2D::CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideCircleHitbox(const Circle& circle, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        return CollideCirclePolygone(circle, hitbox.ToPolygone(), collisionPoint, normal1, normal2);
+        return CollideCirclePolygone(circle, hitbox.toPolygone(), outCollisionPoint, outNormal1, outNormal2);
     }
 
     bool Collider2D::CollideCircleLine(const Circle& circle, const Vector2& A, const Vector2& B)
@@ -452,7 +696,7 @@ namespace ToricCollisionSystem
         return CollideCircleLine(circle, line.A, line.B);
     }
 
-    bool Collider2D::CollideCircleLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideCircleLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
         float rr = circle.radius * circle.radius;
         bool containA = Vector2::sqrDistance(circle.center(), A) <= rr;
@@ -463,43 +707,43 @@ namespace ToricCollisionSystem
             Vector2 closestPoint = !containA ? Line2D::ClosestPoint(A, B, circle.center()) : StraightLine2D::ClosestPoint(A, B, circle.center());
             if (!containA && Vector2::sqrDistance(closestPoint, circle.center()) > rr)
             {
-                collisionPoint = Vector2::zero();
+                outCollisionPoint = Vector2::zero();
                 return false;
             }
 
             Vector2 dir = closestPoint - circle.center();
-            dir.Normalize();
-            collisionPoint = circle.center() + dir * circle.radius;
+            dir.normalize();
+            outCollisionPoint = circle.center() + dir * circle.radius;
             return true;
         }
 
         pair<Vector2, Vector2> intersections = ComputeCircleStraightLineIntersectionsUnchecked(circle, A, B);
         Vector2 i1 = intersections.first;
         Vector2 i2 = intersections.second;
-        collisionPoint = (min(A.x, B.x) <= i1.x && i1.x <= max(A.x, B.x) && min(A.y, B.y) <= i1.y && i1.y <= max(A.y, B.y)) ? i1 : i2;
+        outCollisionPoint = (min(A.x, B.x) <= i1.x && i1.x <= max(A.x, B.x) && min(A.y, B.y) <= i1.y && i1.y <= max(A.y, B.y)) ? i1 : i2;
         return true;
     }
 
-    bool Collider2D::CollideCircleLine(const Circle& circle, const Line2D& line, Vector2& collisionPoint)
+    bool Collider2D::CollideCircleLine(const Circle& circle, const Line2D& line, Vector2& outCollisionPoint)
     {
-        return CollideCircleLine(circle, line.A, line.B, collisionPoint);
+        return CollideCircleLine(circle, line.A, line.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCircleLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCircleLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        if (CollideCircleLine(circle, A, B, collisionPoint))
+        if (CollideCircleLine(circle, A, B, outCollisionPoint))
         {
-            normal = collisionPoint - circle.center();
-            normal.Normalize();
+            outNormal = outCollisionPoint - circle.center();
+            outNormal.normalize();
             return true;
         }
-        normal = Vector2::zero();
+        outNormal = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollideCircleLine(const Circle& circle, const Line2D& line, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCircleLine(const Circle& circle, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideCircleLine(circle, line.A, line.B, collisionPoint, normal);
+        return CollideCircleLine(circle, line.A, line.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideCircleStraightLine(const Circle& circle, const StraightLine2D& straightLine) 
@@ -516,49 +760,49 @@ namespace ToricCollisionSystem
         return numerator < circle.radius * magnitude;
     }
 
-    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const StraightLine2D& straightLine, Vector2& collisionPoint) 
+    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const StraightLine2D& straightLine, Vector2& outCollisionPoint) 
     {
-        return CollideCircleStraightLine(circle, straightLine.A, straightLine.B, collisionPoint);
+        return CollideCircleStraightLine(circle, straightLine.A, straightLine.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& collisionPoint) 
+    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint) 
     {
         if (!CollideCircleStraightLine(circle, A, B)) 
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
         Vector2 u = B - A;
         Vector2 AC = circle.center() - A;
         float ti = (u.x * AC.x + u.y * AC.y) / (u.x * u.x + u.y * u.y);
-        collisionPoint.x = A.x + ti * u.x;
-        collisionPoint.x = A.y + ti * u.y;
+        outCollisionPoint.x = A.x + ti * u.x;
+        outCollisionPoint.x = A.y + ti * u.y;
 
-        ti = Vector2::sqrDistance(collisionPoint, circle.center());
+        ti = Vector2::sqrDistance(outCollisionPoint, circle.center());
 
         if (ti > circle.radius * circle.radius)
             return true;
 
-        Vector2 endLine = collisionPoint + (circle.radius / sqrtf(ti)) * (collisionPoint - circle.center());
-        return Collider2D::CollideCircleLine(circle, collisionPoint, endLine, collisionPoint);
+        Vector2 endLine = outCollisionPoint + (circle.radius / sqrtf(ti)) * (outCollisionPoint - circle.center());
+        return Collider2D::CollideCircleLine(circle, outCollisionPoint, endLine, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal) 
+    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal) 
     {
-        if (CollideCircleStraightLine(circle, A, B, collisionPoint)) 
+        if (CollideCircleStraightLine(circle, A, B, outCollisionPoint)) 
         {
-            normal = collisionPoint - circle.center();
-            normal.Normalize();
+            outNormal = outCollisionPoint - circle.center();
+            outNormal.normalize();
             return true;
         }
-        normal = Vector2::zero();
+        outNormal = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const StraightLine2D& straightLine, Vector2& collisionPoint, Vector2& normal) 
+    bool Collider2D::CollideCircleStraightLine(const Circle& circle, const StraightLine2D& straightLine, Vector2& outCollisionPoint, Vector2& outNormal) 
     {
-        return CollideCircleStraightLine(circle, straightLine.A, straightLine.B, collisionPoint, normal);
+        return CollideCircleStraightLine(circle, straightLine.A, straightLine.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideCircleRay(const Circle& circle, const Ray2D& ray) 
@@ -571,16 +815,16 @@ namespace ToricCollisionSystem
         return Collider2D::CollideCircleLine(circle, start, end);
     }
 
-    bool Collider2D::CollideCircleRay(const Circle& circle, const Ray2D& ray, Vector2& collisionPoint) 
+    bool Collider2D::CollideCircleRay(const Circle& circle, const Ray2D& ray, Vector2& outCollisionPoint) 
     {
-        return CollideCircleRay(circle, ray.start, ray.end, collisionPoint);
+        return CollideCircleRay(circle, ray.start, ray.end, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCircleRay(const Circle& circle, const Vector2& start, const Vector2& end, Vector2& collisionPoint) 
+    bool Collider2D::CollideCircleRay(const Circle& circle, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint) 
     {
-        if (circle.Contains(start)) 
+        if (circle.contains(start)) 
         {
-            collisionPoint = start;
+            outCollisionPoint = start;
             return true;
         }
 
@@ -597,48 +841,48 @@ namespace ToricCollisionSystem
 
             if (containI1 && containI2) 
             {
-                collisionPoint = Vector2::sqrDistance(start, i1) <= Vector2::sqrDistance(start, i2) ? i1 : i2;
+                outCollisionPoint = Vector2::sqrDistance(start, i1) <= Vector2::sqrDistance(start, i2) ? i1 : i2;
                 return true;
             }
             if (containI1) 
             {
-                collisionPoint = i1;
+                outCollisionPoint = i1;
                 return true;
             }
             if (containI2) 
             {
-                collisionPoint = i2;
+                outCollisionPoint = i2;
                 return true;
             }
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollideCircleRay(const Circle& circle, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal) 
+    bool Collider2D::CollideCircleRay(const Circle& circle, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal) 
     {
-        return CollideCircleRay(circle, ray.start, ray.end, collisionPoint, normal);
+        return CollideCircleRay(circle, ray.start, ray.end, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideCircleRay(const Circle& circle, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal) 
+    bool Collider2D::CollideCircleRay(const Circle& circle, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal) 
     {
-        if (circle.Contains(start)) 
+        if (circle.contains(start)) 
         {
-            collisionPoint = start;
-            normal = start - circle.center();
-            normal.Normalize();
+            outCollisionPoint = start;
+            outNormal = start - circle.center();
+            outNormal.normalize();
             return true;
         }
 
-        if (CollideCircleRay(circle, start, end, collisionPoint)) 
+        if (CollideCircleRay(circle, start, end, outCollisionPoint)) 
         {
-            normal = collisionPoint - circle.center();
-            normal.Normalize();
+            outNormal = outCollisionPoint - circle.center();
+            outNormal.normalize();
             return true;
         }
 
-        collisionPoint = normal = Vector2::zero();
+        outCollisionPoint = outNormal = Vector2::zero();
         return false;
     }
 
@@ -654,7 +898,7 @@ namespace ToricCollisionSystem
         if (distance >= 1e-5f)
         {
             Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) / distance;
-            Vector2 dirVerti = dirHori.NormalVector();
+            Vector2 dirVerti = dirHori.normalVector();
             distance *= 0.5f;
 
             Line2D line1(
@@ -676,7 +920,7 @@ namespace ToricCollisionSystem
         return false;
     }
 
-    bool Collider2D::CollideCircleCapsule(const Circle& circle, const Capsule& capsule, Vector2& collisionPoint)
+    bool Collider2D::CollideCircleCapsule(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint)
     {
         float distance = Vector2::distance(capsule.circle1().center(), capsule.circle2().center());
         Vector2 i1, i2;
@@ -685,7 +929,7 @@ namespace ToricCollisionSystem
         if (distance >= 1e-3f)
         {
             Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) * (1.0f / distance);
-            Vector2 dirVerti = dirHori.NormalVector();
+            Vector2 dirVerti = dirHori.normalVector();
             distance *= 0.5f;
 
             Line2D line1(
@@ -711,7 +955,7 @@ namespace ToricCollisionSystem
                                 Vector2 tmp = (i1 + i2) * 0.5f;
                                 float dist = circle.radius - ((circle.radius - Vector2::distance(circle.center(), tmp)) * 0.5f);
                                 Vector2 norm = tmp - circle.center();
-                                norm.Normalize();
+                                norm.normalize();
                                 cache.emplace_back(circle.center() + norm * dist);
                             }
                             else if (containI1)
@@ -742,44 +986,44 @@ namespace ToricCollisionSystem
                 cache.emplace_back(i2);
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         if (!cache.empty())
         {
             for (const Vector2& pos : cache)
-                collisionPoint = collisionPoint + pos;
+                outCollisionPoint = outCollisionPoint + pos;
 
-            collisionPoint = collisionPoint * (1.0f / static_cast<float>(cache.size()));
+            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
             cache.clear();
             return true;
         }
 
-        if (circle.Contains(capsule.center()))
+        if (circle.contains(capsule.center()))
         {
-            collisionPoint = (circle.center() + capsule.center()) * 0.5f;
+            outCollisionPoint = (circle.center() + capsule.center()) * 0.5f;
             return true;
         }
 
-        if (capsule.Contains(circle.center()))
+        if (capsule.contains(circle.center()))
         {
-            collisionPoint = (circle.center() + capsule.center()) * 0.5f;
+            outCollisionPoint = (circle.center() + capsule.center()) * 0.5f;
             return true;
         }
 
         return false;
     }
 
-    bool Collider2D::CollideCircleCapsule(const Circle& circle, const Capsule& capsule, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideCircleCapsule(const Circle& circle, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        if (CollideCircleCapsule(circle, capsule, collisionPoint))
+        if (CollideCircleCapsule(circle, capsule, outCollisionPoint))
         {
-            normal1 = collisionPoint - circle.center();
-            normal1.Normalize();
-            normal2 = normal1 * -1.0f;
+            outNormal1 = outCollisionPoint - circle.center();
+            outNormal1.normalize();
+            outNormal2 = outNormal1 * -1.0f;
             return true;
         }
 
-        normal1 = Vector2::zero();
-        normal2 = Vector2::zero();
+        outNormal1 = Vector2::zero();
+        outNormal2 = Vector2::zero();
         return false;
     }
 
@@ -807,10 +1051,10 @@ namespace ToricCollisionSystem
 
         const Circle& c1 = poly1.inclusiveCircle();
         const Circle& c2 = poly2.inclusiveCircle();
-        return (c1.radius >= c2.radius) ? poly1.Contains(poly2.center()) : poly2.Contains(poly1.center());
+        return (c1.radius >= c2.radius) ? poly1.contains(poly2.center()) : poly2.contains(poly1.center());
     }
 
-    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outCollisionPoint)
+    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outoutCollisionPoint)
     {
         const vector<Vector2>& v1 = poly1.vertices();
         const vector<Vector2>& v2 = poly2.vertices();
@@ -835,33 +1079,33 @@ namespace ToricCollisionSystem
 
         if (!cache.empty())
         {
-            outCollisionPoint = Vector2::zero();
+            outoutCollisionPoint = Vector2::zero();
             for (const Vector2& pt : cache)
-                outCollisionPoint = outCollisionPoint + pt;
-            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
+                outoutCollisionPoint = outoutCollisionPoint + pt;
+            outoutCollisionPoint = outoutCollisionPoint * (1.0f / static_cast<float>(cache.size()));
             cache.clear();
             return true;
         }
 
-        bool contains = (poly1.inclusiveCircle().radius >= poly2.inclusiveCircle().radius) ? poly1.Contains(poly2.center()) : poly2.Contains(poly1.center());
+        bool contains = (poly1.inclusiveCircle().radius >= poly2.inclusiveCircle().radius) ? poly1.contains(poly2.center()) : poly2.contains(poly1.center());
 
         if (contains)
         {
-            outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+            outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
             return true;
         }
 
-        outCollisionPoint = Vector2::zero();
+        outoutCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
+    bool Collider2D::CollidePolygones(const Polygone& poly1, const Polygone& poly2, Vector2& outoutCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        if (poly1.Contains(poly2.center()) && poly2.Contains(poly1.center()))
+        if (poly1.contains(poly2.center()) && poly2.contains(poly1.center()))
         {
             outNormal1 = Vector2::normalize(poly2.center() - poly1.center());
             outNormal2 = outNormal1 * -1.0f;
-            outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+            outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
             return true;
         }
 
@@ -882,12 +1126,12 @@ namespace ToricCollisionSystem
                 if (CollideLines(v1[i], side1, v2[j], v2[jp1], intersec))
                 {
                     cache.push_back(intersec);
-                    Vector2 n = (side1 - v1[i]).NormalVector();
+                    Vector2 n = (side1 - v1[i]).normalVector();
                     if (!poly1.IsNormalOnRightDirection(intersec, n, static_cast<int>(i)))
                         n = n * -1.0f;
                     cache.push_back(n);
 
-                    n = (v2[jp1] - v2[j]).NormalVector();
+                    n = (v2[jp1] - v2[j]).normalVector();
                     if (!poly2.IsNormalOnRightDirection(intersec, n, static_cast<int>(j)))
                         n = n * -1.0f;
                     cache1.push_back(n);
@@ -897,33 +1141,33 @@ namespace ToricCollisionSystem
 
         if (cache.empty())
         {
-            bool contains = (poly1.inclusiveCircle().radius >= poly2.inclusiveCircle().radius) ? poly1.Contains(poly2.center()) : poly2.Contains(poly1.center());
+            bool contains = (poly1.inclusiveCircle().radius >= poly2.inclusiveCircle().radius) ? poly1.contains(poly2.center()) : poly2.contains(poly1.center());
             if (contains)
             {
-                outCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
+                outoutCollisionPoint = (poly1.center() + poly2.center()) * 0.5f;
                 outNormal1 = Vector2::normalize(poly2.center() - poly1.center());
                 outNormal2 = outNormal1 * -1.0f;
                 return true;
             }
-            outCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
+            outoutCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
             return false;
         }
 
-        outCollisionPoint = outNormal1 = Vector2::zero();
+        outoutCollisionPoint = outNormal1 = Vector2::zero();
         for (const Vector2& pt : cache)
         {
-            outCollisionPoint = outCollisionPoint + pt;
+            outoutCollisionPoint = outoutCollisionPoint + pt;
         }
-        outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(cache.size()));
+        outoutCollisionPoint = outoutCollisionPoint * (1.0f / static_cast<float>(cache.size()));
         cache.clear();
 
         for (const Vector2& n : cache1)
         {
             outNormal1 = outNormal1 + n;
         }
-        outNormal1.Normalize();
+        outNormal1.normalize();
 
-        if (Vector2::dot(outNormal1, outCollisionPoint - poly1.center()) < 0.0f)
+        if (Vector2::dot(outNormal1, outoutCollisionPoint - poly1.center()) < 0.0f)
         {
             outNormal1 = outNormal1 * -1.0f;
         }
@@ -934,17 +1178,17 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox)
     {
-        return CollidePolygones(hitbox.ToPolygone(), poly);
+        return CollidePolygones(hitbox.toPolygone(), poly);
     }
 
-    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint)
+    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outoutCollisionPoint)
     {
-        return CollidePolygones(poly, hitbox.ToPolygone(), outCollisionPoint);
+        return CollidePolygones(poly, hitbox.toPolygone(), outoutCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outCollisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollidePolygoneHitbox(const Polygone& poly, const Hitbox& hitbox, Vector2& outoutCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        return CollidePolygones(poly, hitbox.ToPolygone(), outCollisionPoint, normal1, normal2);
+        return CollidePolygones(poly, hitbox.toPolygone(), outoutCollisionPoint, outNormal1, outNormal2);
     }
 
     bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B)
@@ -958,34 +1202,34 @@ namespace ToricCollisionSystem
             if (CollideLines(A, B, vertices[i], vertices[ip1]))
                 return true;
         }
-        return poly.Contains(A);
+        return poly.contains(A);
     }
 
     bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line)
     {
-        return poly.CollideLine(line);
+        return poly.collideLine(line);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outoutCollisionPoint)
     {
         Line2D line(A, B);
-        return CollidePolygoneLine(poly, line, outCollisionPoint);
+        return CollidePolygoneLine(poly, line, outoutCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outCollisionPoint)
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outoutCollisionPoint)
     {
-        return CollidePolygoneLine(poly, line.A, line.B, outCollisionPoint);
+        return CollidePolygoneLine(poly, line.A, line.B, outoutCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Vector2& A, const Vector2& B, Vector2& outoutCollisionPoint, Vector2& outNormal)
     {
         Line2D line(A, B);
-        return CollidePolygoneLine(poly, line, outCollisionPoint, outNormal);
+        return CollidePolygoneLine(poly, line, outoutCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
+    bool Collider2D::CollidePolygoneLine(const Polygone& poly, const Line2D& line, Vector2& outoutCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneLine(poly, line.A, line.B, outCollisionPoint, outNormal);
+        return CollidePolygoneLine(poly, line.A, line.B, outoutCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B)
@@ -1005,10 +1249,10 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine)
     {
-        return polygone.CollideStraightLine(straightLine);
+        return polygone.collideStraightLine(straightLine);
     }
 
-    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
         const auto& vertices = polygone.vertices();
         const uint32_t count = vertices.size();
@@ -1026,7 +1270,7 @@ namespace ToricCollisionSystem
 
         if (cache.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
@@ -1036,8 +1280,8 @@ namespace ToricCollisionSystem
 
         avgInter = avgInter / static_cast<float>(cache.size());
 
-        Vector2 normal = (B - A).NormalVector();
-        Vector2 otherPoint = avgInter + normal;
+        Vector2 outNormal = (B - A).normalVector();
+        Vector2 otherPoint = avgInter + outNormal;
 
         float minSqrDist = FLT_MAX;
         Vector2 bestPoint = Vector2::zero();
@@ -1059,16 +1303,16 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = bestPoint;
+        outCollisionPoint = bestPoint;
         return true;
     }
 
-    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine, Vector2& collisionPoint)
+    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneStraightLine(polygone, straightLine.A, straightLine.B, collisionPoint);
+        return CollidePolygoneStraightLine(polygone, straightLine.A, straightLine.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
         const auto& vertices = polygone.vertices();
         const uint32_t count = vertices.size();
@@ -1087,8 +1331,8 @@ namespace ToricCollisionSystem
 
         if (cache.empty())
         {
-            collisionPoint = Vector2::zero();
-            normal = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
+            outNormal = Vector2::zero();
             return false;
         }
 
@@ -1097,7 +1341,7 @@ namespace ToricCollisionSystem
             avgInter = avgInter + pt;
 
         avgInter = avgInter / static_cast<float>(cache.size());
-        Vector2 candidateNormal = (B - A).NormalVector();
+        Vector2 candidateNormal = (B - A).normalVector();
         Vector2 otherPoint = avgInter + candidateNormal;
 
         float minSqrDist = FLT_MAX;
@@ -1122,27 +1366,27 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = bestPoint;
+        outCollisionPoint = bestPoint;
         if (minSideIndex >= 0)
         {
             const Vector2& p1 = vertices[minSideIndex];
             const Vector2& p2 = vertices[(minSideIndex + 1) % count];
-            normal = (p2 - p1).NormalVector();
+            outNormal = (p2 - p1).normalVector();
 
-            if (!polygone.IsNormalOnRightDirection(collisionPoint, normal, minSideIndex))
-                normal = normal * -1.0f;
+            if (!polygone.IsNormalOnRightDirection(outCollisionPoint, outNormal, minSideIndex))
+                outNormal = outNormal * -1.0f;
         }
         else
         {
-            normal = Vector2::zero();
+            outNormal = Vector2::zero();
         }
 
         return true;
     }
 
-    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollidePolygoneStraightLine(const Polygone& polygone, const StraightLine2D& straightLine, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneStraightLine(polygone, straightLine.A, straightLine.B, collisionPoint, normal);
+        return CollidePolygoneStraightLine(polygone, straightLine.A, straightLine.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Ray2D& ray)
@@ -1156,16 +1400,16 @@ namespace ToricCollisionSystem
         return CollidePolygoneRay(polygone, start, end, _);
     }
 
-    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Ray2D& ray, Vector2& collisionPoint)
+    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Ray2D& ray, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneRay(polygone, ray.start, ray.end, collisionPoint);
+        return CollidePolygoneRay(polygone, ray.start, ray.end, outCollisionPoint);
     }
 
-    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Vector2& start, const Vector2& end, Vector2& collisionPoint)
+    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint)
     {
-        if (polygone.Contains(start))
+        if (polygone.contains(start))
         {
-            collisionPoint = start;
+            outCollisionPoint = start;
             return true;
         }
 
@@ -1208,12 +1452,12 @@ namespace ToricCollisionSystem
 
         if (collideVertices.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
-        collisionPoint = collideVertices[0];
-        float minSqrDist = Vector2::sqrDistance(start, collisionPoint);
+        outCollisionPoint = collideVertices[0];
+        float minSqrDist = Vector2::sqrDistance(start, outCollisionPoint);
 
         for (const Vector2& p : collideVertices)
         {
@@ -1221,24 +1465,24 @@ namespace ToricCollisionSystem
             if (dist < minSqrDist)
             {
                 minSqrDist = dist;
-                collisionPoint = p;
+                outCollisionPoint = p;
             }
         }
 
         return true;
     }
 
-    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneRay(polygone, ray.start, ray.end, collisionPoint, normal);
+        return CollidePolygoneRay(polygone, ray.start, ray.end, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollidePolygoneRay(const Polygone& polygone, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        if (polygone.Contains(start))
+        if (polygone.contains(start))
         {
-            collisionPoint = start;
-            normal = Vector2::normalize(start - polygone.center());
+            outCollisionPoint = start;
+            outNormal = Vector2::normalize(start - polygone.center());
             return true;
         }
 
@@ -1284,13 +1528,13 @@ namespace ToricCollisionSystem
 
         if (intersections.empty())
         {
-            collisionPoint = normal = Vector2::zero();
+            outCollisionPoint = outNormal = Vector2::zero();
             return false;
         }
 
         uint32_t indexMinDist = 0u;
-        collisionPoint = intersections[0];
-        float minSqrDist = Vector2::sqrDistance(start, collisionPoint);
+        outCollisionPoint = intersections[0];
+        float minSqrDist = Vector2::sqrDistance(start, outCollisionPoint);
 
         for (uint32_t i = 1u; i < intersections.size(); i++)
         {
@@ -1298,16 +1542,16 @@ namespace ToricCollisionSystem
             if (dist < minSqrDist)
             {
                 minSqrDist = dist;
-                collisionPoint = intersections[i];
+                outCollisionPoint = intersections[i];
                 indexMinDist = i;
             }
         }
 
         int sideIndex = intersSideIndex[indexMinDist];
-        normal = (vertices[(sideIndex + 1u) % count] - vertices[sideIndex]).NormalVector();
-        if (!polygone.IsNormalOnRightDirection(collisionPoint, normal, sideIndex))
+        outNormal = (vertices[(sideIndex + 1u) % count] - vertices[sideIndex]).normalVector();
+        if (!polygone.IsNormalOnRightDirection(outCollisionPoint, outNormal, sideIndex))
         {
-            normal = normal * -1.0f;
+            outNormal = outNormal * -1.0f;
         }
 
         return true;
@@ -1320,11 +1564,11 @@ namespace ToricCollisionSystem
             || CollidePolygoneHitbox(polygone, capsule.hitbox());
     }
 
-    bool Collider2D::CollidePolygoneCapsule(const Polygone& polygone, const Capsule& capsule, Vector2& collisionPoint)
+    bool Collider2D::CollidePolygoneCapsule(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint)
     {
         float distance = Vector2::distance(capsule.circle1().center(), capsule.circle2().center());
         Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) / distance;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         distance *= 0.5f;
 
         Line2D line1(
@@ -1372,32 +1616,32 @@ namespace ToricCollisionSystem
 
         if (!collideVertices.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             for (const Vector2& pt : collideVertices)
             {
-                collisionPoint = collisionPoint + pt;
+                outCollisionPoint = outCollisionPoint + pt;
             }
-            collisionPoint = collisionPoint * (1.0f / static_cast<float>(collideVertices.size()));
+            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(collideVertices.size()));
             return true;
         }
 
-        bool contains = capsule.inclusiveCircle().radius >= polygone.inclusiveCircle().radius ? capsule.Contains(polygone.center()) : polygone.Contains(capsule.center());
+        bool contains = capsule.inclusiveCircle().radius >= polygone.inclusiveCircle().radius ? capsule.contains(polygone.center()) : polygone.contains(capsule.center());
 
         if (contains)
         {
-            collisionPoint = (capsule.center() + polygone.center()) * 0.5f;
+            outCollisionPoint = (capsule.center() + polygone.center()) * 0.5f;
             return true;
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollidePolygoneCapsule(const Polygone& polygone, const Capsule& capsule, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollidePolygoneCapsule(const Polygone& polygone, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
         float distance = Vector2::distance(capsule.circle1().center(), capsule.circle2().center());
         Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) / distance;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         distance *= 0.5f;
 
         Line2D line1(
@@ -1411,7 +1655,7 @@ namespace ToricCollisionSystem
 
         const vector<Vector2>& vertices = polygone.vertices();
         vector<Vector2> intersections;
-        vector<Vector2> normals;
+        vector<Vector2> outNormals;
         Vector2 inter, n;
 
         for (uint32_t i = 0u; i < vertices.size(); i++)
@@ -1423,7 +1667,7 @@ namespace ToricCollisionSystem
             if (CollideLines(v1, v2, line1.A, line1.B, inter))
             {
                 intersections.push_back(inter);
-                n = (v2 - v1).NormalVector();
+                n = (v2 - v1).normalVector();
                 if (!polygone.IsNormalOnRightDirection(inter, n, static_cast<int>(i)))
                 {
                     n = n * -1.0f;
@@ -1437,11 +1681,11 @@ namespace ToricCollisionSystem
                 intersections.push_back(inter);
                 if (!nComputed)
                 {
-                    n = (v2 - v1).NormalVector();
+                    n = (v2 - v1).normalVector();
                     if (!polygone.IsNormalOnRightDirection(inter, n, static_cast<int>(i)))
                         n = n * -1.0f;
                 }
-                normals.push_back(n);
+                outNormals.push_back(n);
             }
 
             vector<Vector2> circleInter1 = ComputeCircleLineIntersections(capsule.circle1(), v1, v2);
@@ -1451,7 +1695,7 @@ namespace ToricCollisionSystem
                 if (Vector2::dot(n, dirHori) < 0.0f)
                 {
                     intersections.push_back(pt);
-                    normals.push_back(n * (1.0f / capsule.circle1().radius));
+                    outNormals.push_back(n * (1.0f / capsule.circle1().radius));
                 }
             }
 
@@ -1462,43 +1706,43 @@ namespace ToricCollisionSystem
                 if (Vector2::dot(n, dirHori) > 0)
                 {
                     intersections.push_back(pt);
-                    normals.push_back(n * (1.0f / capsule.circle2().radius));
+                    outNormals.push_back(n * (1.0f / capsule.circle2().radius));
                 }
             }
         }
 
         if (!intersections.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             for (const Vector2& pt : intersections)
             {
-                collisionPoint = collisionPoint + pt;
+                outCollisionPoint = outCollisionPoint + pt;
             }
-            collisionPoint = collisionPoint * (1.0f / static_cast<float>(intersections.size()));
+            outCollisionPoint = outCollisionPoint * (1.0f / static_cast<float>(intersections.size()));
 
-            normal1 = Vector2::zero();
-            for (const Vector2& norm : normals)
+            outNormal1 = Vector2::zero();
+            for (const Vector2& norm : outNormals)
             {
-                normal1 = normal1 + norm;
+                outNormal1 = outNormal1 + norm;
             }
 
-            normal1.Normalize();
-            normal2 = normal1 * -1.0f;
+            outNormal1.normalize();
+            outNormal2 = outNormal1 * -1.0f;
             return true;
         }
 
-        bool contains = capsule.inclusiveCircle().radius >= polygone.inclusiveCircle().radius ? capsule.Contains(polygone.center()) : polygone.Contains(capsule.center());
+        bool contains = capsule.inclusiveCircle().radius >= polygone.inclusiveCircle().radius ? capsule.contains(polygone.center()) : polygone.contains(capsule.center());
 
         if (contains)
         {
-            collisionPoint = (capsule.center() + polygone.center()) * 0.5f;
-            normal1 = capsule.center() - polygone.center();
-            normal1.Normalize();
-            normal2 = normal1 * -1.0f;
+            outCollisionPoint = (capsule.center() + polygone.center()) * 0.5f;
+            outNormal1 = capsule.center() - polygone.center();
+            outNormal1.normalize();
+            outNormal2 = outNormal1 * -1.0f;
             return true;
         }
 
-        collisionPoint = normal1 = normal2 = Vector2::zero();
+        outCollisionPoint = outNormal1 = outNormal2 = Vector2::zero();
         return false;
     }
 
@@ -1508,22 +1752,22 @@ namespace ToricCollisionSystem
 
     bool Collider2D::CollideHitboxes(const Hitbox& h1, const Hitbox& h2)
     {
-        return CollidePolygones(h1.ToPolygone(), h2.ToPolygone());
+        return CollidePolygones(h1.toPolygone(), h2.toPolygone());
     }
 
-    bool Collider2D::CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& outCollisionPoint)
     {
-        return CollidePolygones(h1.ToPolygone(), h2.ToPolygone(), collisionPoint);
+        return CollidePolygones(h1.toPolygone(), h2.toPolygone(), outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideHitboxes(const Hitbox& h1, const Hitbox& h2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        return CollidePolygones(h1.ToPolygone(), h2.ToPolygone(), collisionPoint, normal1, normal2);
+        return CollidePolygones(h1.toPolygone(), h2.toPolygone(), outCollisionPoint, outNormal1, outNormal2);
     }
 
     bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B)
     {
-        return CollidePolygoneLine(hitbox.ToPolygone(), A, B);
+        return CollidePolygoneLine(hitbox.toPolygone(), A, B);
     }
 
     bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Line2D& line)
@@ -1531,84 +1775,84 @@ namespace ToricCollisionSystem
         return CollideHitboxLine(hitbox, line.A, line.B);
     }
 
-    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneLine(hitbox.ToPolygone(), A, B, collisionPoint);
+        return CollidePolygoneLine(hitbox.toPolygone(), A, B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& outCollisionPoint)
     {
-        return CollideHitboxLine(hitbox, line.A, line.B, collisionPoint);
+        return CollideHitboxLine(hitbox, line.A, line.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneLine(hitbox.ToPolygone(), A, B, collisionPoint, normal);
+        return CollidePolygoneLine(hitbox.toPolygone(), A, B, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxLine(const Hitbox& hitbox, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideHitboxLine(hitbox, line.A, line.B, collisionPoint, normal);
+        return CollideHitboxLine(hitbox, line.A, line.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line)
     {
-        return CollidePolygoneStraightLine(hitbox.ToPolygone(), line.A, line.B);
+        return CollidePolygoneStraightLine(hitbox.toPolygone(), line.A, line.B);
     }
 
     bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B)
     {
-        return CollidePolygoneStraightLine(hitbox.ToPolygone(), A, B);
+        return CollidePolygoneStraightLine(hitbox.toPolygone(), A, B);
     }
 
-    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneStraightLine(hitbox.ToPolygone(), A, B, collisionPoint);
+        return CollidePolygoneStraightLine(hitbox.toPolygone(), A, B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& outCollisionPoint)
     {
-        return CollideHitboxStraightLine(hitbox, line.A, line.B, collisionPoint);
+        return CollideHitboxStraightLine(hitbox, line.A, line.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneStraightLine(hitbox.ToPolygone(), A, B, collisionPoint, normal);
+        return CollidePolygoneStraightLine(hitbox.toPolygone(), A, B, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxStraightLine(const Hitbox& hitbox, const StraightLine2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideHitboxStraightLine(hitbox, line.A, line.B, collisionPoint, normal);
+        return CollideHitboxStraightLine(hitbox, line.A, line.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), ray);
+        return CollidePolygoneRay(hitbox.toPolygone(), ray);
     }
 
     bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), start, end);
+        return CollidePolygoneRay(hitbox.toPolygone(), start, end);
     }
 
-    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), ray, collisionPoint);
+        return CollidePolygoneRay(hitbox.toPolygone(), ray, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), start, end, collisionPoint);
+        return CollidePolygoneRay(hitbox.toPolygone(), start, end, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), ray, collisionPoint, normal);
+        return CollidePolygoneRay(hitbox.toPolygone(), ray, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideHitboxRay(const Hitbox& hitbox, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollidePolygoneRay(hitbox.ToPolygone(), start, end, collisionPoint, normal);
+        return CollidePolygoneRay(hitbox.toPolygone(), start, end, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule)
@@ -1618,14 +1862,14 @@ namespace ToricCollisionSystem
             CollideHitboxes(hitbox, capsule.hitbox());
     }
 
-    bool Collider2D::CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& collisionPoint)
+    bool Collider2D::CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint)
     {
-        return CollidePolygoneCapsule(hitbox.ToPolygone(), capsule, collisionPoint);
+        return CollidePolygoneCapsule(hitbox.toPolygone(), capsule, outCollisionPoint);
     }
 
-    bool Collider2D::CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideHitboxCapsule(const Hitbox& hitbox, const Capsule& capsule, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        return CollidePolygoneCapsule(hitbox.ToPolygone(), capsule, collisionPoint, normal1, normal2);
+        return CollidePolygoneCapsule(hitbox.toPolygone(), capsule, outCollisionPoint, outNormal1, outNormal2);
     }
 
     #pragma endregion
@@ -1639,80 +1883,80 @@ namespace ToricCollisionSystem
             || CollideHitboxCapsule(capsule1.hitbox(), capsule2);
     }
 
-    bool Collider2D::CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint)
     {
         vector<Vector2> intersections;
-        if (Collider2D::CollideHitboxes(capsule1.hitbox(), capsule2.hitbox(), collisionPoint))
+        if (Collider2D::CollideHitboxes(capsule1.hitbox(), capsule2.hitbox(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircleHitbox(capsule2.circle1(), capsule1.hitbox(), collisionPoint))
+        if (CollideCircleHitbox(capsule2.circle1(), capsule1.hitbox(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircleHitbox(capsule2.circle2(), capsule1.hitbox(), collisionPoint))
+        if (CollideCircleHitbox(capsule2.circle2(), capsule1.hitbox(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircleHitbox(capsule1.circle1(), capsule2.hitbox(), collisionPoint))
+        if (CollideCircleHitbox(capsule1.circle1(), capsule2.hitbox(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircles(capsule1.circle1(), capsule2.circle1(), collisionPoint))
+        if (CollideCircles(capsule1.circle1(), capsule2.circle1(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircles(capsule1.circle1(), capsule2.circle2(), collisionPoint))
+        if (CollideCircles(capsule1.circle1(), capsule2.circle2(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircleHitbox(capsule1.circle2(), capsule2.hitbox(), collisionPoint))
+        if (CollideCircleHitbox(capsule1.circle2(), capsule2.hitbox(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircles(capsule1.circle2(), capsule2.circle1(), collisionPoint))
+        if (CollideCircles(capsule1.circle2(), capsule2.circle1(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        if (CollideCircles(capsule1.circle2(), capsule2.circle2(), collisionPoint))
+        if (CollideCircles(capsule1.circle2(), capsule2.circle2(), outCollisionPoint))
         {
-            intersections.push_back(collisionPoint);
+            intersections.push_back(outCollisionPoint);
         }
 
-        collisionPoint.x = 0.0f;
-        collisionPoint.y = 0.0f;
+        outCollisionPoint.x = 0.0f;
+        outCollisionPoint.y = 0.0f;
         if (!intersections.empty())
         {
             for (const Vector2& pt : intersections)
             {
-                collisionPoint = collisionPoint + pt;
+                outCollisionPoint = outCollisionPoint + pt;
             }
 
-            collisionPoint = collisionPoint / static_cast<float>(intersections.size());
+            outCollisionPoint = outCollisionPoint / static_cast<float>(intersections.size());
             return true;
         }
 
         return false;
     }
 
-    bool Collider2D::CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& collisionPoint, Vector2& normal1, Vector2& normal2)
+    bool Collider2D::CollideCapsules(const Capsule& capsule1, const Capsule& capsule2, Vector2& outCollisionPoint, Vector2& outNormal1, Vector2& outNormal2)
     {
-        if (CollideCapsules(capsule1, capsule2, collisionPoint))
+        if (CollideCapsules(capsule1, capsule2, outCollisionPoint))
         {
-            normal1 = Vector2::normalize(collisionPoint - capsule1.center());
-            normal2 = Vector2::normalize(collisionPoint - capsule2.center());
+            outNormal1 = Vector2::normalize(outCollisionPoint - capsule1.center());
+            outNormal2 = Vector2::normalize(outCollisionPoint - capsule2.center());
             return true;
         }
 
-        normal1 = normal2 = Vector2::zero();
+        outNormal1 = outNormal2 = Vector2::zero();
         return false;
     }
 
@@ -1726,16 +1970,16 @@ namespace ToricCollisionSystem
         return CollideCircleLine(capsule.circle1(), A, B) || CollideCircleLine(capsule.circle2(), A, B) || CollideHitboxLine(capsule.hitbox(), A, B);
     }
 
-    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& outCollisionPoint)
     {
-        return CollideCapsuleLine(capsule, line.A, line.B, collisionPoint);
+        return CollideCapsuleLine(capsule, line.A, line.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
         float distance = Vector2::distance(capsule.circle1().center(), capsule.circle2().center());
         Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) / distance;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         float halfDistance = distance * 0.5f;
 
         Vector2 center = capsule.hitbox().center();
@@ -1778,11 +2022,11 @@ namespace ToricCollisionSystem
         {
             if (intersections.size() == 1u)
             {
-                collisionPoint = intersections[0u];
+                outCollisionPoint = intersections[0u];
                 return true;
             }
 
-            if (capsule.Contains(A)) 
+            if (capsule.contains(A)) 
             {
                 if (CollideLineStraightLine(line1.A, line1.B, A, B, inter)) 
                 {
@@ -1819,31 +2063,31 @@ namespace ToricCollisionSystem
             }
             else 
             {
-                collisionPoint = Vector2::zero();
+                outCollisionPoint = Vector2::zero();
                 return false;
             }
         }
 
-        collisionPoint = intersections[0];
+        outCollisionPoint = intersections[0];
         for (uint32_t i = 1; i < intersections.size(); i++)
         {
-            collisionPoint = collisionPoint + intersections[i];
+            outCollisionPoint = outCollisionPoint + intersections[i];
         }
-        collisionPoint = collisionPoint / static_cast<float>(intersections.size());
+        outCollisionPoint = outCollisionPoint / static_cast<float>(intersections.size());
 
         intersections.clear();
-        Vector2 otherPoint = collisionPoint + (B - A).NormalVector();
+        Vector2 otherPoint = outCollisionPoint + (B - A).normalVector();
 
-        if (CollideLineStraightLine(line1.A, line1.B, collisionPoint, otherPoint, inter))
+        if (CollideLineStraightLine(line1.A, line1.B, outCollisionPoint, otherPoint, inter))
         {
             intersections.push_back(inter);
         }
-        if (CollideLineStraightLine(line2.A, line2.B, collisionPoint, otherPoint, inter))
+        if (CollideLineStraightLine(line2.A, line2.B, outCollisionPoint, otherPoint, inter))
         {
             intersections.push_back(inter);
         }
 
-        if (ComputeCircleStraightLineIntersections(capsule.circle1(), collisionPoint, otherPoint, inter, inter2)) 
+        if (ComputeCircleStraightLineIntersections(capsule.circle1(), outCollisionPoint, otherPoint, inter, inter2)) 
         {
             if (Vector2::dot(dirHori, inter - capsule.circle1().center()) > 0.0f)
             {
@@ -1855,7 +2099,7 @@ namespace ToricCollisionSystem
             }
         }
 
-        if (ComputeCircleStraightLineIntersections(capsule.circle2(), collisionPoint, otherPoint, inter, inter2)) 
+        if (ComputeCircleStraightLineIntersections(capsule.circle2(), outCollisionPoint, otherPoint, inter, inter2)) 
         {
             if (Vector2::dot(dirHori, inter - capsule.circle2().center()) < 0.0f)
             {
@@ -1869,17 +2113,17 @@ namespace ToricCollisionSystem
 
         if (intersections.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
         // Find closest point
         Vector2 closest = intersections[0];
-        float minSqr = Vector2::sqrDistance(collisionPoint, closest);
+        float minSqr = Vector2::sqrDistance(outCollisionPoint, closest);
 
         for (uint32_t i = 1u; i < intersections.size(); i++)
         {
-            float sqr = Vector2::sqrDistance(collisionPoint, intersections[i]);
+            float sqr = Vector2::sqrDistance(outCollisionPoint, intersections[i]);
             if (sqr < minSqr) 
             {
                 minSqr = sqr;
@@ -1887,15 +2131,15 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = closest;
+        outCollisionPoint = closest;
         return true;
     }
 
-    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
         float dist = Vector2::distance(capsule.circle1().center(), capsule.circle2().center());
         Vector2 dirHori = (capsule.circle1().center() - capsule.circle2().center()) / dist;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         dist *= 0.5f;
 
         Vector2 mid = capsule.hitbox().center();
@@ -1905,25 +2149,25 @@ namespace ToricCollisionSystem
         Line2D line2(mid - dirVerti * radius - dirHori * dist, mid - dirVerti * radius + dirHori * dist);
 
         Vector2 inter, inter2;
-        normal = Vector2::zero();
+        outNormal = Vector2::zero();
         vector<Vector2> intersections;
 
         if (CollideLines(line1.A, line1.B, A, B, inter)) 
         {
             intersections.push_back(inter);
-            normal = (line1.B - line1.A).NormalVector();
-            if (Vector2::dot(normal, inter - capsule.center()) < 0.0f)
+            outNormal = (line1.B - line1.A).normalVector();
+            if (Vector2::dot(outNormal, inter - capsule.center()) < 0.0f)
             {
-                normal = normal * -1.0f;
+                outNormal = outNormal * -1.0f;
             }
         }
         if (CollideLines(line2.A, line2.B, A, B, inter))
         {
             intersections.push_back(inter);
-            normal = (line2.B - line2.A).NormalVector();
-            if (Vector2::dot(normal, inter - capsule.center()) < 0.0f)
+            outNormal = (line2.B - line2.A).normalVector();
+            if (Vector2::dot(outNormal, inter - capsule.center()) < 0.0f)
             {
-                normal = normal * -1.0f;
+                outNormal = outNormal * -1.0f;
             }
         }
 
@@ -1933,7 +2177,7 @@ namespace ToricCollisionSystem
             if (Vector2::dot(dirHori, pt - capsule.circle1().center()) > 0.0f) 
             {
                 intersections.push_back(pt);
-                normal = Vector2::normalize(pt - capsule.circle1().center());
+                outNormal = Vector2::normalize(pt - capsule.circle1().center());
             }
         }
 
@@ -1943,7 +2187,7 @@ namespace ToricCollisionSystem
             if (Vector2::dot(dirHori, pt - capsule.circle2().center()) < 0.0f) 
             {
                 intersections.push_back(pt);
-                normal = Vector2::normalize(pt - capsule.circle2().center());
+                outNormal = Vector2::normalize(pt - capsule.circle2().center());
             }
         }
 
@@ -1951,12 +2195,12 @@ namespace ToricCollisionSystem
         {
             if (intersections.size() == 1u)
             {
-                collisionPoint = intersections[0];
+                outCollisionPoint = intersections[0];
                 intersections.clear();
                 return true;
             }
 
-            if (capsule.Contains(A)) 
+            if (capsule.contains(A)) 
             {
                 if (CollideLineStraightLine(line1.A, line1.B, A, B, inter)) 
                 {
@@ -1996,29 +2240,29 @@ namespace ToricCollisionSystem
             }
             else 
             {
-                collisionPoint = Vector2::zero();
+                outCollisionPoint = Vector2::zero();
                 return false;
             }
         }
 
         if (intersections.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         for (const Vector2& pt : intersections)
         {
-            collisionPoint = collisionPoint + pt;
+            outCollisionPoint = outCollisionPoint + pt;
         }
-        collisionPoint = collisionPoint / static_cast<float>(intersections.size());
+        outCollisionPoint = outCollisionPoint / static_cast<float>(intersections.size());
 
-        Vector2 otherPoint = collisionPoint + (B - A).NormalVector();
-        if (CollideLineStraightLine(line1.A, line1.B, collisionPoint, otherPoint, inter)) 
+        Vector2 otherPoint = outCollisionPoint + (B - A).normalVector();
+        if (CollideLineStraightLine(line1.A, line1.B, outCollisionPoint, otherPoint, inter)) 
         {
             intersections.push_back(inter);
-            Vector2 n = (line1.B - line1.A).NormalVector();
+            Vector2 n = (line1.B - line1.A).normalVector();
             if (Vector2::dot(n, inter - capsule.center()) < 0.0f) 
             {
                 n = n * -1.0f;
@@ -2026,10 +2270,10 @@ namespace ToricCollisionSystem
             intersections.push_back(n);
         }
 
-        if (CollideLineStraightLine(line2.A, line2.B, collisionPoint, otherPoint, inter)) 
+        if (CollideLineStraightLine(line2.A, line2.B, outCollisionPoint, otherPoint, inter)) 
         {
             intersections.push_back(inter);
-            Vector2 n = (line2.B - line2.A).NormalVector();
+            Vector2 n = (line2.B - line2.A).normalVector();
             if (Vector2::dot(n, inter - capsule.center()) < 0.0f) 
             {
                 n = n * -1.0f;
@@ -2037,40 +2281,40 @@ namespace ToricCollisionSystem
             intersections.push_back(n);
         }
 
-        vector<Vector2> normals;
-        if (ComputeCircleStraightLineIntersections(capsule.circle1(), collisionPoint, otherPoint, inter, inter2)) 
+        vector<Vector2> outNormals;
+        if (ComputeCircleStraightLineIntersections(capsule.circle1(), outCollisionPoint, otherPoint, inter, inter2)) 
         {
             if (Vector2::dot(dirHori, inter - capsule.circle1().center()) > 0.0f) 
             {
                 intersections.push_back(inter);
-                normals.push_back(Vector2::normalize(inter - capsule.circle1().center()));
+                outNormals.push_back(Vector2::normalize(inter - capsule.circle1().center()));
             }
             if (Vector2::dot(dirHori, inter2 - capsule.circle1().center()) > 0.0f) 
             {
                 intersections.push_back(inter2);
-                normals.push_back(Vector2::normalize(inter2 - capsule.circle1().center()));
+                outNormals.push_back(Vector2::normalize(inter2 - capsule.circle1().center()));
             }
         }
-        if (ComputeCircleStraightLineIntersections(capsule.circle2(), collisionPoint, otherPoint, inter, inter2)) 
+        if (ComputeCircleStraightLineIntersections(capsule.circle2(), outCollisionPoint, otherPoint, inter, inter2)) 
         {
             if (Vector2::dot(dirHori, inter - capsule.circle2().center()) < 0.0f) 
             {
                 intersections.push_back(inter);
-                normals.push_back(Vector2::normalize(inter - capsule.circle2().center()));
+                outNormals.push_back(Vector2::normalize(inter - capsule.circle2().center()));
             }
             if (Vector2::dot(dirHori, inter2 - capsule.circle2().center()) < 0.0f) 
             {
                 intersections.push_back(inter2);
-                normals.push_back(Vector2::normalize(inter2 - capsule.circle2().center()));
+                outNormals.push_back(Vector2::normalize(inter2 - capsule.circle2().center()));
             }
         }
 
         inter = intersections[0];
-        float minSqr = Vector2::sqrDistance(collisionPoint, inter);
+        float minSqr = Vector2::sqrDistance(outCollisionPoint, inter);
         uint32_t minIdx = 0u;
-        for (uint32_t i = 1u; i < intersections.size(); ++i)
+        for (uint32_t i = 1u; i < intersections.size(); i++)
         {
-            float d = Vector2::sqrDistance(collisionPoint, intersections[i]);
+            float d = Vector2::sqrDistance(outCollisionPoint, intersections[i]);
             if (d < minSqr) 
             {
                 minSqr = d;
@@ -2079,14 +2323,14 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = inter;
-        normal = normals[minIdx];
+        outCollisionPoint = inter;
+        outNormal = outNormals[minIdx];
         return true;
     }
 
-    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleLine(const Capsule& capsule, const Line2D& line, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideCapsuleLine(capsule, line.A, line.B, collisionPoint, normal);
+        return CollideCapsuleLine(capsule, line.A, line.B, outCollisionPoint, outNormal);
     }
 
     bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& line)
@@ -2099,14 +2343,14 @@ namespace ToricCollisionSystem
         return CollideCircleStraightLine(*capsule._circle1, A, B) || CollideCircleStraightLine(*capsule._circle2, A, B) || CollideHitboxStraightLine(*capsule._hitbox, A, B);
     }
 
-    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint)
     {
         const Vector2& c1 = capsule._circle1->center();
         const Vector2& c2 = capsule._circle2->center();
         float dist = Vector2::distance(c1, c2);
 
         Vector2 dirHori = (c1 - c2) / dist;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         dist *= 0.5f;
 
         Vector2 center = capsule._hitbox->center();
@@ -2161,29 +2405,29 @@ namespace ToricCollisionSystem
 
         if (intersections.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
-        collisionPoint = intersections[0];
-        for (size_t i = 1; i < intersections.size(); ++i)
+        outCollisionPoint = intersections[0];
+        for (uint32_t i = 1; i < intersections.size(); i++)
         {
-            collisionPoint = collisionPoint + intersections[i];
+            outCollisionPoint = outCollisionPoint + intersections[i];
         }
-        collisionPoint = collisionPoint / static_cast<float>(intersections.size());
+        outCollisionPoint = outCollisionPoint / static_cast<float>(intersections.size());
 
-        Vector2 otherPoint = collisionPoint + (B - A).NormalVector();
-        if (CollideLineStraightLine(line1.A, line1.B, collisionPoint, otherPoint, inter))
-        {
-            intersections.push_back(inter);
-        }
-
-        if (CollideLineStraightLine(line2.A, line2.B, collisionPoint, otherPoint, inter))
+        Vector2 otherPoint = outCollisionPoint + (B - A).normalVector();
+        if (CollideLineStraightLine(line1.A, line1.B, outCollisionPoint, otherPoint, inter))
         {
             intersections.push_back(inter);
         }
 
-        if (ComputeCircleStraightLineIntersections(*capsule._circle1, collisionPoint, otherPoint, inter, inter2))
+        if (CollideLineStraightLine(line2.A, line2.B, outCollisionPoint, otherPoint, inter))
+        {
+            intersections.push_back(inter);
+        }
+
+        if (ComputeCircleStraightLineIntersections(*capsule._circle1, outCollisionPoint, otherPoint, inter, inter2))
         {
             if (Vector2::dot(dirHori, inter - c1) > 0.0f) 
             {
@@ -2196,7 +2440,7 @@ namespace ToricCollisionSystem
             }
         }
 
-        if (ComputeCircleStraightLineIntersections(*capsule._circle2, collisionPoint, otherPoint, inter, inter2))
+        if (ComputeCircleStraightLineIntersections(*capsule._circle2, outCollisionPoint, otherPoint, inter, inter2))
         {
             if (Vector2::dot(dirHori, inter - c2) < 0.0f) 
             {
@@ -2211,16 +2455,16 @@ namespace ToricCollisionSystem
 
         if (intersections.empty())
         {
-            collisionPoint = Vector2::zero();
+            outCollisionPoint = Vector2::zero();
             return false;
         }
 
         inter = intersections[0];
-        float minSqrDistance = Vector2::sqrDistance(collisionPoint, inter);
+        float minSqrDistance = Vector2::sqrDistance(outCollisionPoint, inter);
 
-        for (size_t i = 1; i < intersections.size(); ++i)
+        for (uint32_t i = 1; i < intersections.size(); i++)
         {
-            float d = Vector2::sqrDistance(collisionPoint, intersections[i]);
+            float d = Vector2::sqrDistance(outCollisionPoint, intersections[i]);
             if (d < minSqrDistance)
             {
                 minSqrDistance = d;
@@ -2228,25 +2472,25 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = inter;
+        outCollisionPoint = inter;
         return true;
     }
 
-    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& outCollisionPoint)
     {
-        return CollideCapsuleStraightLine(capsule, straightLine.A, straightLine.B, collisionPoint);
+        return CollideCapsuleStraightLine(capsule, straightLine.A, straightLine.B, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const StraightLine2D& straightLine, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideCapsuleStraightLine(capsule, straightLine.A, straightLine.B, collisionPoint, normal);
+        return CollideCapsuleStraightLine(capsule, straightLine.A, straightLine.B, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleStraightLine(const Capsule& capsule, const Vector2& A, const Vector2& B, Vector2& outCollisionPoint, Vector2& outNormal)
     {
         float dist = Vector2::distance(capsule._circle1->center(), capsule._circle2->center());
         Vector2 dirHori = Vector2::normalize(capsule._circle1->center() - capsule._circle2->center());
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         dist *= 0.5f;
 
         Vector2 center = capsule._hitbox->center();
@@ -2296,83 +2540,83 @@ namespace ToricCollisionSystem
 
         if (intersections.empty())
         {
-            collisionPoint = normal = Vector2::zero();
+            outCollisionPoint = outNormal = Vector2::zero();
             return false;
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         for (const Vector2& p : intersections)
         {
-            collisionPoint = collisionPoint + p;
+            outCollisionPoint = outCollisionPoint + p;
         }
-        collisionPoint = collisionPoint / static_cast<float>(intersections.size());
+        outCollisionPoint = outCollisionPoint / static_cast<float>(intersections.size());
 
-        Vector2 otherPoint = collisionPoint + (B - A).NormalVector();
-        vector<Vector2> normals;
+        Vector2 otherPoint = outCollisionPoint + (B - A).normalVector();
+        vector<Vector2> outNormals;
 
-        if (CollideLineStraightLine(line1.A, line1.B, collisionPoint, otherPoint, inter)) 
+        if (CollideLineStraightLine(line1.A, line1.B, outCollisionPoint, otherPoint, inter)) 
         {
             intersections.push_back(inter);
-            normal = (line1.B - line1.A).NormalVector();
-            if (Vector2::dot(normal, inter - capsule.center()) < 0.f) 
+            outNormal = (line1.B - line1.A).normalVector();
+            if (Vector2::dot(outNormal, inter - capsule.center()) < 0.f) 
             {
-                normal = -1.0f * normal;
+                outNormal = -1.0f * outNormal;
             }
-            normals.push_back(normal);
+            outNormals.push_back(outNormal);
         }
 
-        if (CollideLineStraightLine(line2.A, line2.B, collisionPoint, otherPoint, inter)) 
+        if (CollideLineStraightLine(line2.A, line2.B, outCollisionPoint, otherPoint, inter)) 
         {
             intersections.push_back(inter);
-            normal = (line2.B - line2.A).NormalVector();
-            if (Vector2::dot(normal, inter - capsule.center()) < 0.f) 
+            outNormal = (line2.B - line2.A).normalVector();
+            if (Vector2::dot(outNormal, inter - capsule.center()) < 0.f) 
             {
-                normal = -1.0f * normal;
+                outNormal = -1.0f * outNormal;
             }
-            normals.push_back(normal);
+            outNormals.push_back(outNormal);
         }
 
-        if (ComputeCircleStraightLineIntersections(capsule.circle1(), collisionPoint, otherPoint, inter, inter2))
+        if (ComputeCircleStraightLineIntersections(capsule.circle1(), outCollisionPoint, otherPoint, inter, inter2))
         {
             if (Vector2::dot(dirHori, inter - capsule._circle1->center()) > 0.0f)
             {
                 intersections.push_back(inter);
-                normals.push_back(Vector2::normalize(inter - capsule._circle1->center()));
+                outNormals.push_back(Vector2::normalize(inter - capsule._circle1->center()));
             }
             if (Vector2::dot(dirHori, inter2 - capsule._circle1->center()) > 0.0f)
             {
                 intersections.push_back(inter2);
-                normals.push_back(Vector2::normalize(inter2 - capsule._circle1->center()));
+                outNormals.push_back(Vector2::normalize(inter2 - capsule._circle1->center()));
             }
         }
 
-        if (ComputeCircleStraightLineIntersections(capsule.circle2(), collisionPoint, otherPoint, inter, inter2))
+        if (ComputeCircleStraightLineIntersections(capsule.circle2(), outCollisionPoint, otherPoint, inter, inter2))
         {
             if (Vector2::dot(dirHori, inter - capsule._circle2->center()) < 0.0f) 
             {
                 intersections.push_back(inter);
-                normals.push_back(Vector2::normalize(inter - capsule._circle2->center()));
+                outNormals.push_back(Vector2::normalize(inter - capsule._circle2->center()));
             }
 
             if (Vector2::dot(dirHori, inter2 - capsule._circle2->center()) < 0.0f)
             {
                 intersections.push_back(inter2);
-                normals.push_back(Vector2::normalize(inter2 - capsule._circle2->center()));
+                outNormals.push_back(Vector2::normalize(inter2 - capsule._circle2->center()));
             }
         }
 
         if (intersections.empty())
         {
-            collisionPoint = normal = Vector2::zero();
+            outCollisionPoint = outNormal = Vector2::zero();
             return false;
         }
 
-        float minSqrDist = Vector2::sqrDistance(collisionPoint, intersections[0]);
+        float minSqrDist = Vector2::sqrDistance(outCollisionPoint, intersections[0]);
         uint32_t minIndex = 0u;
 
-        for (size_t i = 1u; i < intersections.size(); i++)
+        for (uint32_t i = 1u; i < intersections.size(); i++)
         {
-            float sqrDist = Vector2::sqrDistance(collisionPoint, intersections[i]);
+            float sqrDist = Vector2::sqrDistance(outCollisionPoint, intersections[i]);
             if (sqrDist < minSqrDist) 
             {
                 minSqrDist = sqrDist;
@@ -2380,8 +2624,8 @@ namespace ToricCollisionSystem
             }
         }
 
-        collisionPoint = intersections[minIndex];
-        normal = normals[minIndex];
+        outCollisionPoint = intersections[minIndex];
+        outNormal = outNormals[minIndex];
 
         return true;
     }
@@ -2396,12 +2640,12 @@ namespace ToricCollisionSystem
         return CollideCapsuleLine(capsule, start, end);
     }
 
-    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& outCollisionPoint)
     {
-        return CollideCapsuleRay(capsule, ray.start, ray.end, collisionPoint);
+        return CollideCapsuleRay(capsule, ray.start, ray.end, outCollisionPoint);
     }
 
-    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& collisionPoint)
+    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint)
     {
         Vector2 cp0, cp1, cp2;
         bool hit0 = CollideCircleRay(capsule.circle1(), start, end, cp0);
@@ -2416,7 +2660,7 @@ namespace ToricCollisionSystem
             float d1 = Vector2::sqrDistance(beg, cp1);
             float d2 = Vector2::sqrDistance(beg, cp2);
 
-            collisionPoint = (d0 <= d1) ? ((d0 <= d2) ? cp0 : cp2) : ((d1 <= d2) ? cp1 : cp2);
+            outCollisionPoint = (d0 <= d1) ? ((d0 <= d2) ? cp0 : cp2) : ((d1 <= d2) ? cp1 : cp2);
             return true;
         }
 
@@ -2424,7 +2668,7 @@ namespace ToricCollisionSystem
         {
             float d0 = Vector2::sqrDistance(beg, cp0);
             float d1 = Vector2::sqrDistance(beg, cp1);
-            collisionPoint = (d0 <= d1) ? cp0 : cp1;
+            outCollisionPoint = (d0 <= d1) ? cp0 : cp1;
             return true;
         }
 
@@ -2432,7 +2676,7 @@ namespace ToricCollisionSystem
         {
             float d0 = Vector2::sqrDistance(beg, cp0);
             float d2 = Vector2::sqrDistance(beg, cp2);
-            collisionPoint = (d0 <= d2) ? cp0 : cp2;
+            outCollisionPoint = (d0 <= d2) ? cp0 : cp2;
             return true;
         }
 
@@ -2440,41 +2684,41 @@ namespace ToricCollisionSystem
         {
             float d1 = Vector2::sqrDistance(beg, cp1);
             float d2 = Vector2::sqrDistance(beg, cp2);
-            collisionPoint = (d1 <= d2) ? cp1 : cp2;
+            outCollisionPoint = (d1 <= d2) ? cp1 : cp2;
             return true;
         }
 
         if (hit0)
         {
-            collisionPoint = cp0;
+            outCollisionPoint = cp0;
             return true;
         }
 
         if (hit1)
         {
-            collisionPoint = cp1;
+            outCollisionPoint = cp1;
             return true;
         }
 
         if (hit2)
         {
-            collisionPoint = cp2;
+            outCollisionPoint = cp2;
             return true;
         }
 
-        collisionPoint = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
         return false;
     }
 
-    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Ray2D& ray, Vector2& outCollisionPoint, Vector2& outNormal)
     {
-        return CollideCapsuleRay(capsule, ray.start, ray.end, collisionPoint, normal);
+        return CollideCapsuleRay(capsule, ray.start, ray.end, outCollisionPoint, outNormal);
     }
 
-    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& collisionPoint, Vector2& normal)
+    bool Collider2D::CollideCapsuleRay(const Capsule& capsule, const Vector2& start, const Vector2& end, Vector2& outCollisionPoint, Vector2& outNormal)
     {
         Vector2 dir = start - end;
-        dir.Normalize();
+        dir.normalize();
         Vector2 beg = start + dir * (2.0f * capsule.inclusiveCircle().radius);
 
         Vector2 cp0, cp1, cp2;
@@ -2497,26 +2741,26 @@ namespace ToricCollisionSystem
                 {
                     if (d0 <= d2)
                     {
-                        collisionPoint = cp0;
-                        normal = n0;
+                        outCollisionPoint = cp0;
+                        outNormal = n0;
                     }
                     else
                     {
-                        collisionPoint = cp2;
-                        normal = n2;
+                        outCollisionPoint = cp2;
+                        outNormal = n2;
                     }
                 }
                 else
                 {
                     if (d1 <= d2)
                     {
-                        collisionPoint = cp1;
-                        normal = n1;
+                        outCollisionPoint = cp1;
+                        outNormal = n1;
                     }
                     else
                     {
-                        collisionPoint = cp2;
-                        normal = n2;
+                        outCollisionPoint = cp2;
+                        outNormal = n2;
                     }
                 }
 
@@ -2525,13 +2769,13 @@ namespace ToricCollisionSystem
 
             if (d0 <= d1)
             {
-                collisionPoint = cp0;
-                normal = n0;
+                outCollisionPoint = cp0;
+                outNormal = n0;
             }
             else
             {
-                collisionPoint = cp1;
-                normal = n1;
+                outCollisionPoint = cp1;
+                outNormal = n1;
             }
 
             return true;
@@ -2547,20 +2791,20 @@ namespace ToricCollisionSystem
 
                 if (d0 <= d2)
                 {
-                    collisionPoint = cp0;
-                    normal = n0;
+                    outCollisionPoint = cp0;
+                    outNormal = n0;
                 }
                 else
                 {
-                    collisionPoint = cp2;
-                    normal = n2;
+                    outCollisionPoint = cp2;
+                    outNormal = n2;
                 }
 
                 return true;
             }
 
-            collisionPoint = cp0;
-            normal = n0;
+            outCollisionPoint = cp0;
+            outNormal = n0;
             return true;
         }
 
@@ -2574,32 +2818,32 @@ namespace ToricCollisionSystem
 
                 if (d1 <= d2)
                 {
-                    collisionPoint = cp1;
-                    normal = n1;
+                    outCollisionPoint = cp1;
+                    outNormal = n1;
                 }
                 else
                 {
-                    collisionPoint = cp2;
-                    normal = n2;
+                    outCollisionPoint = cp2;
+                    outNormal = n2;
                 }
 
                 return true;
             }
 
-            collisionPoint = cp1;
-            normal = n1;
+            outCollisionPoint = cp1;
+            outNormal = n1;
             return true;
         }
 
         if (hit2)
         {
-            collisionPoint = cp2;
-            normal = n2;
+            outCollisionPoint = cp2;
+            outNormal = n2;
             return true;
         }
 
-        collisionPoint = Vector2::zero();
-        normal = Vector2::zero();
+        outCollisionPoint = Vector2::zero();
+        outNormal = Vector2::zero();
         return false;
     }
 

@@ -12,26 +12,26 @@ namespace ToricCollisionSystem
     Capsule::Capsule(const Vector2& center, const Vector2& size) 
     {
         CapsuleDirection2D direction = (size.x >= size.y) ? CapsuleDirection2D::Horizontal : CapsuleDirection2D::Vertical;
-        Builder(center, size, direction, 0.0f);
+        builder(center, size, direction, 0.0f);
     }
 
     Capsule::Capsule(const Vector2& center, const Vector2& size, float angle) 
     {
         CapsuleDirection2D direction = (size.x >= size.y) ? CapsuleDirection2D::Horizontal : CapsuleDirection2D::Vertical;
-        Builder(center, size, direction, angle);
+        builder(center, size, direction, angle);
     }
 
     Capsule::Capsule(const Vector2& center, const Vector2& size, CapsuleDirection2D direction) 
     {
-        Builder(center, size, direction, 0.0f);
+        builder(center, size, direction, 0.0f);
     }
 
     Capsule::Capsule(const Vector2& center, const Vector2& size, CapsuleDirection2D direction, float angle) 
     {
-        Builder(center, size, direction, angle);
+        builder(center, size, direction, angle);
     }
 
-    void Capsule::Builder(const Vector2& center, const Vector2& size, CapsuleDirection2D direction, float rotation) 
+    void Capsule::builder(const Vector2& center, const Vector2& size, CapsuleDirection2D direction, float rotation) 
     {
         if (direction == CapsuleDirection2D::Horizontal) 
         {
@@ -48,7 +48,7 @@ namespace ToricCollisionSystem
 
         float radius = (Vector2::distance(_circle1->center(), _circle2->center()) + _circle1->radius + _circle2->radius) * 0.5f;
         _inclusiveCircle = new Circle(_hitbox->center(), radius);
-        Rotate(rotation);
+        rotate(rotation);
     }
 
     Capsule::Capsule(const Capsule& capsule)
@@ -84,34 +84,34 @@ namespace ToricCollisionSystem
         return *_hitbox;
     }
 
-    float Capsule::AngleHori() const 
+    float Capsule::angleHori() const 
     {
-        return _hitbox->AngleHori();
+        return _hitbox->angleHori();
     }
 
-    bool Capsule::CollideLine(const Line2D& line) const 
+    bool Capsule::collideLine(const Line2D& line) const 
     {
         //return CollideCapsuleLine(*this, line.A(), line.B());
         return false;
     }
 
-    bool Capsule::CollideStraightLine(const StraightLine2D& line) const 
+    bool Capsule::collideStraightLine(const StraightLine2D& line) const 
     {
         //return CollideCapsuleStraightLine(*this, line.A(), line.B());
         return false;
     }
 
-    bool Capsule::Collide(const Collider2D& collider) const 
+    bool Capsule::collide(const Collider2D& collider) const 
     {
         //return Collider2D::Collide(collider, *this);
         return false;
     }
 
-    Vector2 Capsule::ClosestPoint(const Vector2& point) const 
+    Vector2 Capsule::closestPoint(const Vector2& point) const 
     {
         float distance = Vector2::distance(_circle1->center(), _circle2->center());
         Vector2 dirHori = (_circle1->center() - _circle2->center()) / distance;
-        Vector2 dirVerti = dirHori.NormalVector();
+        Vector2 dirVerti = dirHori.normalVector();
         distance *= 0.5f;
 
         Vector2 A = _hitbox->center() + dirVerti * _circle1->radius - dirHori * distance;
@@ -155,86 +155,81 @@ namespace ToricCollisionSystem
         return res;
     }
 
-    float Capsule::Distance(const Vector2& point) const 
+    float Capsule::distance(const Vector2& point) const 
     {
-        return Contains(point) ? 0.0f : Vector2::distance(ClosestPoint(point), point);
+        return contains(point) ? 0.0f : Vector2::distance(closestPoint(point), point);
     }
 
-    float Capsule::SignedDistance(const Vector2& point) const 
+    float Capsule::signedDistance(const Vector2& point) const 
     {
-        float d = Distance(point);
-        return Contains(point) ? -d : d;
+        float d = distance(point);
+        return contains(point) ? -d : d;
     }
 
-    float Capsule::Area() const 
+    float Capsule::area() const 
     {
-        return _circle1->Area() + _hitbox->Area();
+        return _circle1->area() + _hitbox->area();
     }
 
-    bool Capsule::Contains(const Vector2& point) const 
+    bool Capsule::contains(const Vector2& point) const 
     {
-        return _inclusiveCircle->Contains(point) && (_circle1->Contains(point) || _circle2->Contains(point) || _hitbox->Contains(point));
+        return _inclusiveCircle->contains(point) && (_circle1->contains(point) || _circle2->contains(point) || _hitbox->contains(point));
     }
 
-    Hitbox* Capsule::ToHitbox() const 
-    {
-        return new Hitbox(*_hitbox);
-    }
-
-    void Capsule::MoveAt(const Vector2& pos) 
+    void Capsule::moveAt(const Vector2& pos) 
     {
         Vector2 d1 = _circle1->center() - center();
         Vector2 d2 = _circle2->center() - center();
-        _hitbox->MoveAt(pos);
-        _circle1->MoveAt(pos + d1);
-        _circle2->MoveAt(pos + d2);
-        _inclusiveCircle->MoveAt(pos);
+        _hitbox->moveAt(pos);
+        _circle1->moveAt(pos + d1);
+        _circle2->moveAt(pos + d2);
+        _inclusiveCircle->moveAt(pos);
     }
 
-    void Capsule::Rotate(float angle) 
+    void Capsule::rotate(float angle) 
     {
         Vector2 c = center();
 
         Vector2 offset1 = _circle1->center() - c;
         float len1 = offset1.length();
         float angle1 = Useful::angle(Vector2::zero(), offset1) + angle;
-        _circle1->MoveAt(c + Vector2(len1 * cos(angle1), len1 * sin(angle1)));
+        _circle1->moveAt(c + Vector2(len1 * cos(angle1), len1 * sin(angle1)));
 
         Vector2 offset2 = _circle2->center() - c;
         float len2 = offset2.length();
         float angle2 = Useful::angle(Vector2::zero(), offset2) + angle;
-        _circle2->MoveAt(c + Vector2(len2 * cos(angle2), len2 * sin(angle2)));
+        _circle2->moveAt(c + Vector2(len2 * cos(angle2), len2 * sin(angle2)));
 
-        _hitbox->Rotate(angle);
+        _hitbox->rotate(angle);
     }
 
-    void Capsule::Scale(const Vector2& scale)
+    void Capsule::scale(const Vector2& scale)
     {
-        _circle1->Scale(scale);
-        _circle2->Scale(scale);
-        _hitbox->Scale(scale);
+        _circle1->scale(scale);
+        _circle2->scale(scale);
+        _hitbox->scale(scale);
 
-        _circle1->MoveAt(center() + (_circle1->center() - center()) * scale);
-        _circle2->MoveAt(center() + (_circle2->center() - center()) * scale);
+        _circle1->moveAt(center() + (_circle1->center() - center()) * scale);
+        _circle2->moveAt(center() + (_circle2->center() - center()) * scale);
 
-        _inclusiveCircle->Scale(scale);
+        _inclusiveCircle->scale(scale);
     }
 
-    bool Capsule::Normal(const Vector2& point, Vector2& outNormal) const 
+    bool Capsule::normal(const Vector2& point, Vector2& outNormal) const 
     {
-        if (_circle1->Normal(point, outNormal))
+        if (_circle1->normal(point, outNormal))
             return true;
-        if (_circle2->Normal(point, outNormal))
+        if (_circle2->normal(point, outNormal))
             return true;
-        if (_hitbox->Normal(point, outNormal))
+        if (_hitbox->normal(point, outNormal))
             return true;
-        return Collider2D::Normal(point, outNormal);
+        return Collider2D::normal(point, outNormal);
     }
 
-    string Capsule::ToString() const 
+    string Capsule::toString() const 
     {
         ostringstream oss;
-        oss << "Center:" << center().to_string() << ", size:" << _hitbox->size().to_string() << ", rotation:" << AngleHori();
+        oss << "Center:" << center().to_string() << ", size:" << _hitbox->size().to_string() << ", rotation:" << angleHori();
         return oss.str();
     }
 

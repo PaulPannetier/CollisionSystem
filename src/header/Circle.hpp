@@ -19,19 +19,18 @@ namespace ToricCollisionSystem
         const Vector2& center() const override { return _center; }
         void center(const Vector2& center) { _center = center; }
 
-        bool Collide(const Collider2D& other) const override;
-        bool CollideLine(const Line2D& line) const override;
-        bool CollideStraightLine(const StraightLine2D& straightLine) const override;
-        bool Contains(const Vector2& p) const override;
-        float Distance(const Vector2& point) const override;
-        float SignedDistance(const Vector2& point) const override;
-        float Area() const override;
-        Vector2 ClosestPoint(const Vector2& point) const override;
-        Hitbox* ToHitbox() const override;
-        void MoveAt(const Vector2& position) override;
-        void Rotate(float angle) override;
-        void Scale(const Vector2& scale) override;
-        bool Normal(const Vector2& point, Vector2& normal) const override;
-        std::string ToString() const override;
+        bool collide(const Collider2D& other) const override;
+        bool collideLine(const Line2D& line) const override;
+        bool collideStraightLine(const StraightLine2D& straightLine) const override;
+        bool contains(const Vector2& p) const override;
+        float distance(const Vector2& point) const override;
+        float signedDistance(const Vector2& point) const override;
+        float area() const override;
+        Vector2 closestPoint(const Vector2& point) const override;
+        void moveAt(const Vector2& position) override;
+        void rotate(float angle) override;
+        void scale(const Vector2& scale) override;
+        bool normal(const Vector2& point, Vector2& normal) const override;
+        std::string toString() const override;
     };
 }
